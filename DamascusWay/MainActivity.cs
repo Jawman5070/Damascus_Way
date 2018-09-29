@@ -31,7 +31,8 @@ namespace DamascusWay
             pressCounter++;
             textDisplay.Text = $@"Welcome to the mobile development team. This is the solution we will be using to develop the Android Application for Damascus Way
             You've pushed the button {pressCounter} times so far. Add some code and check it into source control so the other team members can see it.
-            Remove text from here. Jeff was here!!! Zach's here too. Is Mike on yet?";
+            Remove text from here. Jeff was here!!! Zach's here too. Is Mike on yet? Don't think so, he's doing a lot of other stuff for the requirements which is huge, so I don't think 
+            he'll be coding or doing mobile_team stuff for at least a week.";
 
         }
     }
