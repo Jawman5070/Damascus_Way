@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,22 +16,33 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> implements Filterable {
 
     private static final String TAG = "RecyclerViewAdapter";
 
-    private ArrayList<String> mImageNames = new ArrayList<>();
-    private ArrayList<String> mImages = new ArrayList<>();
+    //Variables used for hard coded values
+    //private ArrayList<String> mImageNames;
+    //private ArrayList<String> mImages;
+
+    //Variable to build RecyclerViewAdapter - this gets passed to the Adapter
+    //private ArrayList<Resident> mResidents;
+    private List<Resident> mResidents;
+    //Variable to hold the list for the filter
+    //private ArrayList<Resident> mResidentFull;
+    private List<Resident> mResidentFull;
     private Context mContext;
 
-    public RecyclerViewAdapter(Context context, ArrayList<String> imageNames, ArrayList<String> images) {
-
-        mImageNames = imageNames;
-        mImages = images;
+    public RecyclerViewAdapter(Context context, List<Resident> residents){
         mContext = context;
+        mResidents = residents;
+
+        //This gets passed to the filter first and then passed to adapter after being filtered
+        mResidentFull = residents;
+
     }
 
     @NonNull
@@ -46,39 +59,91 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         Glide.with(mContext)
                 .asBitmap()
-                .load(mImages.get(position))
-                .into(holder.image);
+                //Will need the resident methods to get this
+                .load(mResidents.getPicture().get(position))
+                .into(holder.residentImage);
 
-        holder.imageName.setText(mImageNames.get(position));
+        //Will need the resident methods to get this
+        holder.residentName.setText(mResidents.getName().get(position));
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Log.d(TAG, "onClick: clicked on: " + mImageNames.get(position));
+                Log.d(TAG, "onClick: clicked on: " + mResidents.get(position));
 
-                Toast.makeText(mContext, mImageNames.get(position), Toast.LENGTH_SHORT).show();
+                //Will need the resident methods to get this
+                Toast.makeText(mContext, mResidents.getName().get(position), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return mImageNames.size();
+        return mResidents.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        CircleImageView image;
-        TextView imageName;
+        CircleImageView residentImage;
+        TextView residentName;
         RelativeLayout parentLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            image = itemView.findViewById(R.id.image);
-            imageName = itemView.findViewById(R.id.image_name);
+            residentImage = itemView.findViewById(R.id.image);
+            residentName = itemView.findViewById(R.id.image_name);
             parentLayout = itemView.findViewById(R.id.parent_layout);
         }
     }
+
+    //Filter Results
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
+    private Filter filter = new Filter(){
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Resident> filteredList = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0){
+                filteredList.addAll(mResidentFull);
+            }
+            else {
+                String filterPatter = constraint.toString().toLowerCase().trim();
+
+                for(Resident resident : mResidentFull){
+                    //Will need getName() method from Residents class
+                    if(resident.getName().toLowerCase().contains(filterPatter)){
+                        filteredList.add(resident);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            mResidents.clear();
+            mResidents.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
+/*    RecyclerViewAdapter used with hard coded values
+    public RecyclerViewAdapter(Context context, ArrayList<String> imageNames, ArrayList<String> images) {
+
+        mImageNames = imageNames;
+        mImages = images;
+        mContext = context;
+
+    }
+*/
 
 }
 

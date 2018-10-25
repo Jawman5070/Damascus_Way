@@ -37,6 +37,7 @@ public class Login extends AppCompatActivity {
 
     public void login()
     {
+        /*
         Employee employee = _db.GetEmployee(email.getText().toString(), password.getText().toString());
 
         if(employee != null)
@@ -46,7 +47,7 @@ public class Login extends AppCompatActivity {
             //startActivity(intent);
             // pass employee into the next view
         }
-
+        */
 
 
         if (email.getText().toString() != "" && password.getText().toString().equals("password"))
