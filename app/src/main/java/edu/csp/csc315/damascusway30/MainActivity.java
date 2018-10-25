@@ -4,7 +4,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 
@@ -12,9 +16,18 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-    //variables
-    private ArrayList<String> mNames = new ArrayList<>();
-    private ArrayList<String> mImageUrls = new ArrayList<>();
+    //variables use for hard-coded values
+    //private ArrayList<String> mNames = new ArrayList<>();
+    //private ArrayList<String> mImageUrls = new ArrayList<>();
+
+    //Variables for RecyclerView Adapter
+    private RecyclerViewAdapter adapter;
+    //DatabaseIO to get residents from Database
+    private DatabaseIO databaseIO;
+    //ArrayList to hold the resident Objects
+    private ArrayList<Resident> residents;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +36,48 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: started.");
 
         initImageBitMaps();
-
+        initRecyclerView();
     }
 
     private void initImageBitMaps(){
+        //Add the residents to the ArrayList for RecyclerView
+        //residents.add();
+
+    }
+
+    private void initRecyclerView(){
+        Log.d(TAG, "initRecyclerView: init recyclerview.");
+
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, residents);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_menu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+    }
+
+
+/*Used with hardcoded values
+    private void initImageBitMaps() {
         Log.d(TAG, "initImageBitMaps: preparing bitmaps.");
 
         mImageUrls.add("https://i.imgur.com/Ha3MFuv.jpg");
@@ -61,13 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
         initRecyclerView();
     }
+*/
 
-    private void initRecyclerView(){
-        Log.d(TAG, "initRecyclerView: init recyclerview.");
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, mNames, mImageUrls);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
 }
