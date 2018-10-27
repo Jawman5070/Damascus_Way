@@ -1,11 +1,11 @@
 package edu.csp.csc315.damascusway30;
 
-public class Resident {
+public class Resident implements Comparable<Resident> {
 
     int id;
-    String fName;
-    String lName;
-    String mName;
+    String firstName;
+    String lastName;
+    String middleName;
     String photoUrl;
     boolean sexOffender;
     String riskLevel;
@@ -15,9 +15,9 @@ public class Resident {
     public Resident(int id, String fName, String lName, String mName, String photoUrl,
                     boolean sexOffender, String riskLevel, String eyeColor, String hairColor) {
         this.id = id;
-        this.fName = fName;
-        this.lName = lName;
-        this.mName = mName;
+        this.firstName = fName;
+        this.lastName = lName;
+        this.middleName = mName;
         this.photoUrl = photoUrl;
         this.sexOffender = sexOffender;
         this.riskLevel = riskLevel;
@@ -27,9 +27,9 @@ public class Resident {
 
     public Resident(String fName, String lName, String mName, String photoUrl,
                     boolean sexOffender, String riskLevel, String eyeColor, String hairColor) {
-        this.fName = fName;
-        this.lName = lName;
-        this.mName = mName;
+        this.firstName = fName;
+        this.lastName = lName;
+        this.middleName = mName;
         this.photoUrl = photoUrl;
         this.sexOffender = sexOffender;
         this.riskLevel = riskLevel;
@@ -37,32 +37,37 @@ public class Resident {
         this.hairColor = hairColor;
     }
 
+    // Sorts by lastName
+    public int compareTo(Resident resident) {
+        return this.getlName().compareTo(resident.getlName());
+    }
+
     public int getId() {
         return id;
     }
 
     public String getfName() {
-        return fName;
+        return firstName;
     }
 
     public void setfName(String fName) {
-        this.fName = fName;
+        this.firstName = fName;
     }
 
     public String getlName() {
-        return lName;
+        return lastName;
     }
 
     public void setlName(String lName) {
-        this.lName = lName;
+        this.lastName = lName;
     }
 
     public String getmName() {
-        return mName;
+        return middleName;
     }
 
     public void setmName(String mName) {
-        this.mName = mName;
+        this.middleName = mName;
     }
 
     public String getPhotoUrl() {
@@ -103,6 +108,6 @@ public class Resident {
 
     @Override
     public String toString() {
-        return lName + ", " + fName + " " + mName + " ";
+        return lastName + ", " + firstName + " " + middleName + " ";
     }
 }
