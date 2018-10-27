@@ -3,14 +3,14 @@ package edu.csp.csc315.damascusway30;
 public class Employee {
 
     int id;
-    String fName;
-    String lName;
+    String firstName;
+    String lastName;
 
     public Employee (int id, String fName, String lName) {
 
         this.id = id;
-        this.fName = fName;
-        this.lName = lName;
+        this.firstName = fName;
+        this.lastName = lName;
     }
 
     public int getId() {
@@ -18,10 +18,10 @@ public class Employee {
     }
 
     public String getfName() {
-        return fName;
+        return firstName;
     }
 
     public String getlName() {
-        return lName;
+        return lastName;
     }
 }
