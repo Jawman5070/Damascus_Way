@@ -12,19 +12,6 @@ public class Resident implements Comparable<Resident> {
     String eyeColor;
     String hairColor;
 
-    public Resident(int id, String fName, String lName, String mName, String photoUrl,
-                    boolean sexOffender, String riskLevel, String eyeColor, String hairColor) {
-        this.id = id;
-        this.firstName = fName;
-        this.lastName = lName;
-        this.middleName = mName;
-        this.photoUrl = photoUrl;
-        this.sexOffender = sexOffender;
-        this.riskLevel = riskLevel;
-        this.eyeColor = eyeColor;
-        this.hairColor = hairColor;
-    }
-
     public Resident(String fName, String lName, String mName, String photoUrl,
                     boolean sexOffender, String riskLevel, String eyeColor, String hairColor) {
         this.firstName = fName;
@@ -35,6 +22,12 @@ public class Resident implements Comparable<Resident> {
         this.riskLevel = riskLevel;
         this.eyeColor = eyeColor;
         this.hairColor = hairColor;
+    }
+
+    public Resident(int id, String fName, String lName, String mName, String photoUrl,
+                    boolean sexOffender, String riskLevel, String eyeColor, String hairColor) {
+        this(fName, lName, mName, photoUrl, sexOffender, riskLevel, eyeColor, hairColor);
+        this.id = id;
     }
 
     // Sorts by lastName
