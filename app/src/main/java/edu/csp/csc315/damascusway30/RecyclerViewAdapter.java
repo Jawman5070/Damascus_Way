@@ -20,29 +20,22 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> implements Filterable {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> implements Filterable  {
 
     private static final String TAG = "RecyclerViewAdapter";
 
-    //Variables used for hard coded values
-    //private ArrayList<String> mImageNames;
-    //private ArrayList<String> mImages;
-
-    //Variable to build RecyclerViewAdapter - this gets passed to the Adapter
-    //private ArrayList<Resident> mResidents;
+    //Variable to build RecyclerViewAdapter - this gets passed to the filter
     private List<Resident> mResidents;
-    //Variable to hold the list for the filter
-    //private ArrayList<Resident> mResidentFull;
-    private List<Resident> mResidentFull;
+    //Variable to hold the list for the adapter so that real-time searches can be backspaced and there is a copy of the full list to revert to
+    private List<Resident> mResidentsFull;
     private Context mContext;
 
-    public RecyclerViewAdapter(Context context, List<Resident> residents){
-        mContext = context;
-        mResidents = residents;
-
+    public RecyclerViewAdapter(Context context, List<Resident> residents) {
+        this.mContext = context;
         //This gets passed to the filter first and then passed to adapter after being filtered
-        mResidentFull = residents;
-
+        this.mResidents = residents;
+        //This is a reference copy of the full list from the beginning of the search
+        mResidentsFull = new ArrayList<>(residents);
     }
 
     @NonNull
@@ -60,19 +53,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Glide.with(mContext)
                 .asBitmap()
                 //Will need the resident methods to get this
-                .load(mResidents.getPicture().get(position))
+                .load(mResidents.get(position).getPhotoUrl())
                 .into(holder.residentImage);
 
         //Will need the resident methods to get this
-        holder.residentName.setText(mResidents.getName().get(position));
+        holder.residentName.setText(mResidents.get(position).toString());
 
-        holder.parentLayout.setOnClickListener(new View.OnClickListener(){
+        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on: " + mResidents.get(position));
 
                 //Will need the resident methods to get this
-                Toast.makeText(mContext, mResidents.getName().get(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, mResidents.get(position).toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -95,28 +88,25 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             parentLayout = itemView.findViewById(R.id.parent_layout);
         }
     }
-
     //Filter Results
     @Override
     public Filter getFilter() {
         return filter;
     }
 
-    private Filter filter = new Filter(){
+    private Filter filter = new Filter() {
 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             List<Resident> filteredList = new ArrayList<>();
 
-            if (constraint == null || constraint.length() == 0){
-                filteredList.addAll(mResidentFull);
-            }
-            else {
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(mResidentsFull);
+            } else {
                 String filterPatter = constraint.toString().toLowerCase().trim();
 
-                for(Resident resident : mResidentFull){
-                    //Will need getName() method from Residents class
-                    if(resident.getName().toLowerCase().contains(filterPatter)){
+                for (Resident resident : mResidentsFull) {
+                    if (resident.toString().toLowerCase().contains(filterPatter)) {
                         filteredList.add(resident);
                     }
                 }
@@ -134,16 +124,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             notifyDataSetChanged();
         }
     };
-
-/*    RecyclerViewAdapter used with hard coded values
-    public RecyclerViewAdapter(Context context, ArrayList<String> imageNames, ArrayList<String> images) {
-
-        mImageNames = imageNames;
-        mImages = images;
-        mContext = context;
-
-    }
-*/
-
 }
 
