@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,22 +16,26 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> implements Filterable  {
 
     private static final String TAG = "RecyclerViewAdapter";
 
-    private ArrayList<String> mImageNames = new ArrayList<>();
-    private ArrayList<String> mImages = new ArrayList<>();
+    //Variable to build RecyclerViewAdapter - this gets passed to the filter
+    private List<Resident> mResidents;
+    //Variable to hold the list for the adapter so that real-time searches can be backspaced and there is a copy of the full list to revert to
+    private List<Resident> mResidentsFull;
     private Context mContext;
 
-    public RecyclerViewAdapter(Context context, ArrayList<String> imageNames, ArrayList<String> images) {
-
-        mImageNames = imageNames;
-        mImages = images;
-        mContext = context;
+    public RecyclerViewAdapter(Context context, List<Resident> residents) {
+        this.mContext = context;
+        //This gets passed to the filter first and then passed to adapter after being filtered
+        this.mResidents = residents;
+        //This is a reference copy of the full list from the beginning of the search
+        mResidentsFull = new ArrayList<>(residents);
     }
 
     @NonNull
@@ -46,39 +52,77 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         Glide.with(mContext)
                 .asBitmap()
-                .load(mImages.get(position))
-                .into(holder.image);
+                //Will need the resident methods to get this
+                .load(mResidents.get(position).getPhotoUrl())
+                .into(holder.residentImage);
 
-        holder.imageName.setText(mImageNames.get(position));
+        //Will need the resident methods to get this
+        holder.residentName.setText(mResidents.get(position).toString());
 
-        holder.parentLayout.setOnClickListener(new View.OnClickListener(){
+        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                Log.d(TAG, "onClick: clicked on: " + mImageNames.get(position));
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: clicked on: " + mResidents.get(position));
 
-                Toast.makeText(mContext, mImageNames.get(position), Toast.LENGTH_SHORT).show();
+                //Will need the resident methods to get this
+                Toast.makeText(mContext, mResidents.get(position).toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return mImageNames.size();
+        return mResidents.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        CircleImageView image;
-        TextView imageName;
+        CircleImageView residentImage;
+        TextView residentName;
         RelativeLayout parentLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            image = itemView.findViewById(R.id.image);
-            imageName = itemView.findViewById(R.id.image_name);
+            residentImage = itemView.findViewById(R.id.image);
+            residentName = itemView.findViewById(R.id.image_name);
             parentLayout = itemView.findViewById(R.id.parent_layout);
         }
     }
+    //Filter Results
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
 
+    private Filter filter = new Filter() {
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Resident> filteredList = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(mResidentsFull);
+            } else {
+                String filterPatter = constraint.toString().toLowerCase().trim();
+
+                for (Resident resident : mResidentsFull) {
+                    if (resident.toString().toLowerCase().contains(filterPatter)) {
+                        filteredList.add(resident);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            mResidents.clear();
+            mResidents.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 }
 
