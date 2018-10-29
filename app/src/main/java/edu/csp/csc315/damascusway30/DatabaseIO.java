@@ -3,6 +3,7 @@ package edu.csp.csc315.damascusway30;
 import java.nio.channels.NotYetConnectedException;
 import java.sql.*;
 import java.util.List;
+import javax.sql.*;
 
 public class DatabaseIO {
 
@@ -17,20 +18,33 @@ public class DatabaseIO {
        _connectionString = connectionString;
        _user = user;
        _password = password;
+        DataSource dataSource = new DataSource();
+        dataSource.setUser("scott");
+        dataSource.setPassword("tiger");
+        dataSource.setServerName("myDBHost.example.org");
+
+       Object results = ExecuteSQLCommand("SELECT * FROM RESIDENTS");
+
     }
 
     private Object ExecuteSQLCommand(String commandText)
     {
         try{
+            Class.forName("com.mysql.jdbc.Driver");
             _sqlConnection = DriverManager.getConnection(_connectionString, _user, _password);
+            Boolean isConnected = _sqlConnection.isClosed();
             Statement statement = _sqlConnection.createStatement();
             ResultSet result = statement.executeQuery(commandText);
             return result;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
         }
     }
+
 
     Round GetRound(int id)
     {

@@ -20,7 +20,11 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        _db = new DatabaseIO(null,null,null);
+        String devConnectionString = "jdbc:mysql://107.180.46.186/damascus_way";
+        String devUser = "damascus_way_mob";
+        String devPassword = "b^l}+mS_T0FH";
+
+        _db = new DatabaseIO(devConnectionString,devUser,devPassword);
 
          loginButton = (Button) findViewById(R.id.loginButton);
          email = (EditText) findViewById(R.id.editText2);
