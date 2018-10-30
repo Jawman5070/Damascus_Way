@@ -103,10 +103,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             if (constraint == null || constraint.length() == 0) {
                 filteredList.addAll(mResidentsFull);
             } else {
-                String filterPatter = constraint.toString().toLowerCase().trim();
+                String filterPattern = constraint.toString().toLowerCase().trim();
 
                 for (Resident resident : mResidentsFull) {
-                    if (resident.toString().toLowerCase().contains(filterPatter)) {
+                    if (resident.toString().toLowerCase().contains(filterPattern)) {
                         filteredList.add(resident);
                     }
                 }
