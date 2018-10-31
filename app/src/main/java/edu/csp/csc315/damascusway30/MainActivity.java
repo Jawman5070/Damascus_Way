@@ -1,5 +1,6 @@
 package edu.csp.csc315.damascusway30;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,11 +36,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate: started.");
+        initToolbar();
         initImageBitMaps();
         initRecyclerView();
 
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
     }
 
     private void initImageBitMaps(){
@@ -76,6 +76,15 @@ public class MainActivity extends AppCompatActivity {
         adapter = new RecyclerViewAdapter(this, mResidents);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private void initToolbar(){
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        //set the toolbar logo to Damascus Way
+        toolbar.setLogo(R.drawable.dw_logo);
+        //matches remaining background to white
+        toolbar.setBackgroundColor(Color.WHITE);
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
