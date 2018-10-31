@@ -20,11 +20,11 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        String devConnectionString = "jdbc:mysql://107.180.46.186/damascus_way";
-        String devUser = "damascus_way_mob";
-        String devPassword = "b^l}+mS_T0FH";
+       // String devConnectionString = "jdbc:mysql://107.180.46.186/damascus_way";
+       // String devUser = "damascus_way_mob";
+       // String devPassword = "b^l}+mS_T0FH";
 
-        _db = new DatabaseIO(devConnectionString,devUser,devPassword);
+      //  _db = new DatabaseIO(devConnectionString,devUser,devPassword);
 
          loginButton = (Button) findViewById(R.id.loginButton);
          email = (EditText) findViewById(R.id.editText2);
@@ -56,8 +56,12 @@ public class Login extends AppCompatActivity {
 
         if (email.getText().toString() != "" && password.getText().toString().equals("password"))
         {
+            Employee e = new Employee(0, "The", "Dude");
+            LocalData.getInstance().setCurrentEmployee(e);
+
             // do something1
-            Intent intent = new Intent(Login.this, MainActivity.class);
+            Intent intent = new Intent(Login.this, RoundsActivity.class);
+
             startActivity(intent);
 
         }

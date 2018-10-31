@@ -5,14 +5,18 @@ import java.util.List;
 
 public class Round {
 
+    private int Id;
     public Date TimeStamp;
     public String Location;
     public Employee Employee;
     public List<CheckIn> CheckIns;
 
 
-    public Round()
+    public Round(Date time, String location, Employee employee)
     {
+        TimeStamp = time;
+        Location = location;
+        Employee = employee;
 
     }
 

@@ -1,5 +1,6 @@
 package edu.csp.csc315.damascusway30;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Resident> mResidents = new ArrayList<>();
     //Create Toolbar
     Toolbar toolbar;
+    private Employee loggedInEmployee;
 
 
 
@@ -36,9 +38,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate: started.");
+        loggedInEmployee = LocalData.getInstance().getCurrentEmployee();
         initToolbar();
         initImageBitMaps();
         initRecyclerView();
+
+
 
     }
 
@@ -56,16 +61,26 @@ public class MainActivity extends AppCompatActivity {
         Resident mike = new Resident("Mike", "Davidovich", "", "https://i.imgur.com/CT8ae03.jpg", false, "Medium", "Brown", "Brown", "202", "WR");
         Resident heather = new Resident("Heather", "Kooiker", "", "https://i.imgur.com/sHAYnvR.jpg", true, "Medium", "Brown", "Brown", "103", "ISR");
         //Add residents to List
-        mResidents.add(joel);
-        mResidents.add(cheng);
-        mResidents.add(jeff);
-        mResidents.add(robert);
-        mResidents.add(jerry);
-        mResidents.add(tyrion);
-        mResidents.add(sarah);
-        mResidents.add(vadar);
-        mResidents.add(mike);
-        mResidents.add(heather);
+        // Add different residents based on location of the round
+
+        Round r = LocalData.getInstance().getCurrentRound();
+        String location = r.Location;
+        if(location.equalsIgnoreCase("Location 1")) {
+            mResidents.add(joel);
+            mResidents.add(cheng);
+            mResidents.add(jeff);
+            mResidents.add(robert);
+        }
+        else if (location.equalsIgnoreCase("Location 2")) {
+            mResidents.add(jerry);
+            mResidents.add(tyrion);
+            mResidents.add(sarah);
+            mResidents.add(vadar);
+            mResidents.add(mike);
+        }
+        else {
+            mResidents.add(heather);
+        }
         //Create RecyclerView from List
     }
 
