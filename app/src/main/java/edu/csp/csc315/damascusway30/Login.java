@@ -60,8 +60,7 @@ public class Login extends AppCompatActivity {
             LocalData.getInstance().setCurrentEmployee(e);
 
             // do something1
-            Intent intent = new Intent(Login.this, MainActivity.class);
-
+            Intent intent = new Intent(Login.this, RoundsActivity.class);
 
             startActivity(intent);
 

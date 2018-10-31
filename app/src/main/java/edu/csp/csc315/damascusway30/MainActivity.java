@@ -61,16 +61,26 @@ public class MainActivity extends AppCompatActivity {
         Resident mike = new Resident("Mike", "Davidovich", "", "https://i.imgur.com/CT8ae03.jpg", false, "Medium", "Brown", "Brown");
         Resident heather = new Resident("Heather", "Kooiker", "", "https://i.imgur.com/sHAYnvR.jpg", true, "Medium", "Brown", "Brown");
         //Add residents to List
-        mResidents.add(joel);
-        mResidents.add(cheng);
-        mResidents.add(jeff);
-        mResidents.add(robert);
-        mResidents.add(jerry);
-        mResidents.add(tyrion);
-        mResidents.add(sarah);
-        mResidents.add(vadar);
-        mResidents.add(mike);
-        mResidents.add(heather);
+        // Add different residents based on location of the round
+
+        Round r = LocalData.getInstance().getCurrentRound();
+        String location = r.Location;
+        if(location.equalsIgnoreCase("Location 1")) {
+            mResidents.add(joel);
+            mResidents.add(cheng);
+            mResidents.add(jeff);
+            mResidents.add(robert);
+        }
+        else if (location.equalsIgnoreCase("Location 2")) {
+            mResidents.add(jerry);
+            mResidents.add(tyrion);
+            mResidents.add(sarah);
+            mResidents.add(vadar);
+            mResidents.add(mike);
+        }
+        else {
+            mResidents.add(heather);
+        }
         //Create RecyclerView from List
     }
 
