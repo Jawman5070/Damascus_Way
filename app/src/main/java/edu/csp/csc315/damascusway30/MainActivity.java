@@ -1,5 +1,6 @@
 package edu.csp.csc315.damascusway30;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Resident> mResidents = new ArrayList<>();
     //Create Toolbar
     Toolbar toolbar;
+    private Employee loggedInEmployee;
 
 
 
@@ -36,9 +38,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate: started.");
+        loggedInEmployee = LocalData.getInstance().getCurrentEmployee();
         initToolbar();
         initImageBitMaps();
         initRecyclerView();
+
+
 
     }
 
