@@ -1,6 +1,7 @@
 package edu.csp.csc315.damascusway30;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,14 +12,9 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> implements Filterable  {
@@ -65,8 +61,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on: " + mResidents.get(position));
 
-                //Will need the resident methods to get this
-                Toast.makeText(mContext, mResidents.get(position).toString(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, RoundsDetail.class);
+                intent.putExtra("resident_name", mResidents.get(position).toString());
+                intent.putExtra("room_number", mResidents.get(position).getRoomNumber());
+                intent.putExtra("resident_location", mResidents.get(position).getLocation());
+                intent.putExtra("resident_photo", mResidents.get(position).getPhotoUrl());
+                mContext.startActivity(intent);
             }
         });
     }

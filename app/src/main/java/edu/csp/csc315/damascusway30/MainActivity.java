@@ -45,16 +45,16 @@ public class MainActivity extends AppCompatActivity {
     private void initImageBitMaps(){
 
         //Create some residents to work with for testing
-        Resident joel = new Resident("Joel", "Schuessler", "Clifton", "https://i.imgur.com/Ha3MFuv.jpg", false, "High", "Green", "Brown");
-        Resident cheng = new Resident("Cheng", "Thao", "", "https://i.imgur.com/y19ovIo.jpg", false, "High", "Brown", "Black");
-        Resident jeff = new Resident("El", "Jefe", "", "https://i.imgur.com/NF7LAhw.jpg", true, "Low", "Blue", "Red");
-        Resident robert = new Resident("Robert", "Krueger", "", "https://i.imgur.com/Kw7Ua01.jpg", true, "Medium", "Brown", "Brown");
-        Resident jerry = new Resident("Sailor", "Jerry", "", "https://i.imgur.com/5q4G9P9.jpg", false, "Medium", "Brown", "Brown");
-        Resident tyrion = new Resident("Tyrion", "Lannister", "", "https://i.imgur.com/S1KQZwN.jpg", false, "Medium", "Brown", "Brown");
-        Resident sarah = new Resident("Sarah", "Severson", "", "https://i.imgur.com/FKpCI8Y.jpg", true, "Medium", "Brown", "Brown");
-        Resident vadar = new Resident("Mike", "Vader", "", "https://i.imgur.com/coRRgCY.jpg", true, "Medium", "Brown", "Brown");
-        Resident mike = new Resident("Mike", "Davidovich", "", "https://i.imgur.com/CT8ae03.jpg", false, "Medium", "Brown", "Brown");
-        Resident heather = new Resident("Heather", "Kooiker", "", "https://i.imgur.com/sHAYnvR.jpg", true, "Medium", "Brown", "Brown");
+        Resident joel = new Resident("Joel", "Schuessler", "Clifton", "https://i.imgur.com/Ha3MFuv.jpg", false, "High", "Green", "Brown", "101", "WR");
+        Resident cheng = new Resident("Cheng", "Thao", "", "https://i.imgur.com/y19ovIo.jpg", false, "High", "Brown", "Black", "201", "ISR");
+        Resident jeff = new Resident("El", "Jefe", "", "https://i.imgur.com/NF7LAhw.jpg", true, "Low", "Blue", "Red", "101", "WR");
+        Resident robert = new Resident("Robert", "Krueger", "", "https://i.imgur.com/Kw7Ua01.jpg", true, "Medium", "Brown", "Brown", "201", "ISR");
+        Resident jerry = new Resident("Sailor", "Jerry", "", "https://i.imgur.com/5q4G9P9.jpg", false, "Medium", "Brown", "Brown", "102", "WR");
+        Resident tyrion = new Resident("Tyrion", "Lannister", "", "https://i.imgur.com/S1KQZwN.jpg", false, "Medium", "Brown", "Brown", "102", "WR");
+        Resident sarah = new Resident("Sarah", "Severson", "", "https://i.imgur.com/FKpCI8Y.jpg", true, "Medium", "Brown", "Brown", "202", "WR");
+        Resident vadar = new Resident("Mike", "Vader", "", "https://i.imgur.com/coRRgCY.jpg", true, "Medium", "Brown", "Brown", "203", "ISR");
+        Resident mike = new Resident("Mike", "Davidovich", "", "https://i.imgur.com/CT8ae03.jpg", false, "Medium", "Brown", "Brown", "202", "WR");
+        Resident heather = new Resident("Heather", "Kooiker", "", "https://i.imgur.com/sHAYnvR.jpg", true, "Medium", "Brown", "Brown", "103", "ISR");
         //Add residents to List
         mResidents.add(joel);
         mResidents.add(cheng);
