@@ -1,5 +1,7 @@
 package edu.csp.csc315.damascusway30;
 
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.se.omapi.Reader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,14 +16,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
 
+import org.apache.http.NameValuePair;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -55,24 +61,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
 
-    private ArrayList<Resident> initImageBitMaps() throws Exception{
 
-        //http://chillyfacts.com/java-send-http-getpost-request-and-read-json-response/
-            String url = "http://localhost:63343/Web-App-master/android-connect/get-resident.php";
-            URL obj = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-            con.setRequestMethod("GET");
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-            JSONArray residents = new JSONArray(response.toString());
-            return Resident.fromJson(residents);
-    }
 
     private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview.");
