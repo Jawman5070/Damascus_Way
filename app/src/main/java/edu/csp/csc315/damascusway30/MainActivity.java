@@ -1,5 +1,6 @@
 package edu.csp.csc315.damascusway30;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +12,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
+
+import org.apache.http.NameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -28,13 +36,24 @@ public class MainActivity extends AppCompatActivity {
     //Create Toolbar
     Toolbar toolbar;
 
-
+    //variables for JSON
+    JSONParser jParser = new JSONParser();
+    ArrayList<HashMap<String, String>> residentsList;
+    private static String url_all_products = "http://localhost:63343/Web-App/android-connect/get-resident.php";
+    private static final String TAG_SUCCESS = "success";
+    private static final String TAG_RESIDENTS = "residents";
+    private static final String TAG_RID = "rid";
+    private static final String TAG_FNAME = "fname";
+    private static final String TAG_MNAME = "mname";
+    private static final String TAG_LNAME = "lname";
+    JSONArray residents = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate: started.");
+        new LoadAllResidents().execute();
         initImageBitMaps();
         initRecyclerView();
 
@@ -44,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initImageBitMaps(){
 
+/*
         //Create some residents to work with for testing
         Resident joel = new Resident("Joel", "Schuessler", "Clifton", "https://i.imgur.com/Ha3MFuv.jpg", false, "High", "Green", "Brown");
         Resident cheng = new Resident("Cheng", "Thao", "", "https://i.imgur.com/y19ovIo.jpg", false, "High", "Brown", "Black");
@@ -67,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         mResidents.add(mike);
         mResidents.add(heather);
         //Create RecyclerView from List
+*/
     }
 
     private void initRecyclerView(){
@@ -102,5 +123,44 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         return true;
+    }
+
+    class LoadAllResidents extends AsyncTask<String, String, String> {
+
+        protected String doInBackground(String... args) {
+
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            JSONObject json = jParser.makeHttpRequest(url_all_products, "GET", params);
+
+            Log.d("ALl Residents: ", json.toString());
+
+            try {
+                int success = json.getInt(TAG_SUCCESS);
+
+                if (success == 1) {
+                    residents = json.getJSONArray(TAG_RESIDENTS);
+
+                    for (int i = 0; i < residents.length(); i++) {
+                        JSONObject c = residents.getJSONObject(i);
+
+                        String id = c.getString(TAG_RID);
+                        String fname = c.getString(TAG_FNAME);
+                        String lname = c.getString(TAG_LNAME);
+                        String mname = c.getString(TAG_MNAME);
+
+                        HashMap<String, String> map = new HashMap<String, String>();
+                        map.put(TAG_RID, id);
+                        map.put(TAG_FNAME, fname);
+                        map.put(TAG_LNAME, lname);
+                        map.put(TAG_MNAME, mname);
+
+                        residentsList.add(map);
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 }
