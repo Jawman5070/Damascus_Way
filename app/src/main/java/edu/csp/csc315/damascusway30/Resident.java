@@ -12,6 +12,9 @@ public class Resident implements Comparable<Resident> {
     String eyeColor;
     String hairColor;
 
+    public Resident() {
+    }
+
     public Resident(String fName, String lName, String mName, String photoUrl,
                     boolean sexOffender, String riskLevel, String eyeColor, String hairColor) {
         this.firstName = fName;
@@ -35,6 +38,9 @@ public class Resident implements Comparable<Resident> {
         return this.getlName().compareTo(resident.getlName());
     }
 
+    public void setId(int id){
+        this.id = id;
+    }
     public int getId() {
         return id;
     }

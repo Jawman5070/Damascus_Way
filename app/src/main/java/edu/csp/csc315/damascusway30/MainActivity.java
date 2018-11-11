@@ -20,7 +20,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -132,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             JSONObject json = jParser.makeHttpRequest(url_all_products, "GET", params);
 
-            Log.d("ALl Residents: ", json.toString());
+            Log.d("All Residents: ", json.toString());
 
             try {
                 int success = json.getInt(TAG_SUCCESS);
@@ -155,6 +157,23 @@ public class MainActivity extends AppCompatActivity {
                         map.put(TAG_MNAME, mname);
 
                         residentsList.add(map);
+
+                        //need to parse through residentList and create ArrayList<Resident> for
+                        //for mREsidents
+                        // https://stackoverflow.com/questions/11258969/how-to-get-value-stored-in-arraylisthashmapkey-value
+
+                        int thisID;
+                        String firstName;
+                        String lastName;
+                        String middleName;
+
+                        for (HashMap<String, String> thisMap : residentsList) {
+                            mResidents.add(Resident thisMap.get() = new Resident());
+                            for (Map.Entry<String, String> mapEntry : thisMap.entrySet()) {
+                                //String key = mapEntry.getKey();
+                                thisID = Integer.getInteger(mapEntry.getValue());
+                            }
+                        }
                     }
                 }
             } catch (JSONException e) {
