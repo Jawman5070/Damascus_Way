@@ -1,5 +1,6 @@
 package edu.csp.csc315.damascusway30;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,9 +40,10 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     //variables for JSON
+    private ProgressDialog pDialog;
     JSONParser jParser = new JSONParser();
     ArrayList<HashMap<String, String>> residentsList;
-    private static String url_all_products = "http://localhost:63343/Web-App/android-connect/get-resident.php";
+    private static String url_all_products = "http://localhost/Web-App/android-connect/get-resident.php";
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_RESIDENTS = "residents";
     private static final String TAG_RID = "rid";
@@ -56,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate: started.");
         new LoadAllResidents().execute();
-        initImageBitMaps();
-        initRecyclerView();
+        //initImageBitMaps();
+        //initRecyclerView();
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -127,7 +129,20 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    //https://www.androidhive.info/2012/05/how-to-connect-android-with-php-mysql/
+    //https://developer.android.com/reference/android/os/AsyncTask
+
     class LoadAllResidents extends AsyncTask<String, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(MainActivity.this);
+            pDialog.setMessage("Loading residents. Please wait...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
 
         protected String doInBackground(String... args) {
 
@@ -161,19 +176,6 @@ public class MainActivity extends AppCompatActivity {
                         //need to parse through residentList and create ArrayList<Resident> for
                         //for mREsidents
                         // https://stackoverflow.com/questions/11258969/how-to-get-value-stored-in-arraylisthashmapkey-value
-
-                        int thisID;
-                        String firstName;
-                        String lastName;
-                        String middleName;
-
-                        for (HashMap<String, String> thisMap : residentsList) {
-                            mResidents.add(Resident thisMap.get() = new Resident());
-                            for (Map.Entry<String, String> mapEntry : thisMap.entrySet()) {
-                                //String key = mapEntry.getKey();
-                                thisID = Integer.getInteger(mapEntry.getValue());
-                            }
-                        }
                     }
                 }
             } catch (JSONException e) {
@@ -181,5 +183,21 @@ public class MainActivity extends AppCompatActivity {
             }
             return null;
         }
+
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog after getting all products
+            pDialog.dismiss();
+            // updating UI from Background Thread
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    /**
+                     * Updating parsed JSON data into recycle view
+                     * */
+                    initRecyclerView();
+                }
+            });
+
+        }
+
     }
 }
