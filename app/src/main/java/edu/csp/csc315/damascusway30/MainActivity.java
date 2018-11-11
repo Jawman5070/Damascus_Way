@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -81,6 +82,10 @@ public class MainActivity extends AppCompatActivity {
         else {
             mResidents.add(heather);
         }
+
+        // sort list A-Z
+
+        Collections.sort(mResidents);
         //Create RecyclerView from List
     }
 

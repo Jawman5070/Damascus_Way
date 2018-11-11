@@ -84,6 +84,13 @@ public class DatabaseIO {
 
     List<Resident> GetResidents(String location)
     {
+        // 1) Create and open connection to Web API
+        // 2) Call the correct php script to run SQL query
+        // 3) Return a JSON result object
+        // 4) Close connection
+        // 5) Parse JSON object into local list of residents
+
+
         // return list of residents for location
         throw new NotYetConnectedException();
     }

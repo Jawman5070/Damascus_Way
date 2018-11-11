@@ -91,6 +91,10 @@ public class RoundsActivity extends AppCompatActivity {
         String locale = locationSelection.getSelectedItem().toString();
 
         Round r = new Round(new Date(), locale, employee);
+        // Get list of residents from the database for location
+        // DatabaseIO db = new DatabaseIO("", "", ""); -- This should be stored in the LocalData instead?
+        // var residentList = db.GetResidents("Selected Location");
+
 
 
         Intent i = new Intent(RoundsActivity.this, MainActivity.class);
