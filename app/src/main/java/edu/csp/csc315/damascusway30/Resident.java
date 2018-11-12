@@ -11,9 +11,11 @@ public class Resident implements Comparable<Resident> {
     String riskLevel;
     String eyeColor;
     String hairColor;
+    String roomNumber;
+    String location;
 
     public Resident(String fName, String lName, String mName, String photoUrl,
-                    boolean sexOffender, String riskLevel, String eyeColor, String hairColor) {
+                    boolean sexOffender, String riskLevel, String eyeColor, String hairColor, String roomNumber, String location) {
         this.firstName = fName;
         this.lastName = lName;
         this.middleName = mName;
@@ -22,11 +24,14 @@ public class Resident implements Comparable<Resident> {
         this.riskLevel = riskLevel;
         this.eyeColor = eyeColor;
         this.hairColor = hairColor;
+        this.roomNumber = roomNumber;
+        this.location = location;
+
     }
 
     public Resident(int id, String fName, String lName, String mName, String photoUrl,
-                    boolean sexOffender, String riskLevel, String eyeColor, String hairColor) {
-        this(fName, lName, mName, photoUrl, sexOffender, riskLevel, eyeColor, hairColor);
+                    boolean sexOffender, String riskLevel, String eyeColor, String hairColor, String roomNumber, String location) {
+        this(fName, lName, mName, photoUrl, sexOffender, riskLevel, eyeColor, hairColor, roomNumber, location);
         this.id = id;
     }
 
@@ -102,5 +107,21 @@ public class Resident implements Comparable<Resident> {
     @Override
     public String toString() {
         return lastName + ", " + firstName + " " + middleName + " ";
+    }
+
+    public void setRoomNumber(String roomNumber){
+        this.roomNumber = roomNumber;
+    }
+
+    public String getRoomNumber(){
+        return roomNumber;
+    }
+
+    public void setLocation(String location){
+        this.location = location;
+    }
+
+    public String getLocation(){
+        return location;
     }
 }
