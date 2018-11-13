@@ -1,6 +1,8 @@
 package edu.csp.csc315.damascusway30;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
 
 import org.w3c.dom.Text;
 
@@ -28,6 +31,7 @@ public class RoundsActivity extends AppCompatActivity {
     private Button createNewRound;
     private Spinner locationSelection;
     private ScrollView recentRounds;
+    Toolbar toolbar;
 
     private Employee employee;
 
@@ -35,6 +39,7 @@ public class RoundsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rounds);
+        initToolbar();
 
         employee = LocalData.getInstance().getCurrentEmployee();
 
@@ -95,10 +100,17 @@ public class RoundsActivity extends AppCompatActivity {
         // DatabaseIO db = new DatabaseIO("", "", ""); -- This should be stored in the LocalData instead?
         // var residentList = db.GetResidents("Selected Location");
 
-
-
         Intent i = new Intent(RoundsActivity.this, MainActivity.class);
         LocalData.getInstance().setCurrentRound(r);
         startActivity(i);
+    }
+
+    private void initToolbar(){
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        //set the toolbar logo to Damascus Way
+        toolbar.setLogo(R.drawable.dw_logo);
+        //matches remaining background to white
+        toolbar.setBackgroundColor(Color.WHITE);
     }
 }

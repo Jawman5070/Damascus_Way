@@ -1,6 +1,8 @@
 package edu.csp.csc315.damascusway30;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,15 +39,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate: started.");
         loggedInEmployee = LocalData.getInstance().getCurrentEmployee();
         initToolbar();
         initImageBitMaps();
         initRecyclerView();
-
-
-
+/*
+        //If screen size less than 600, portrait only, else landscape only, this should come first to prevent re-draw of portrait/landscape versions
+        if(getResources().getBoolean(R.bool.landscape_only)){
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+        }
+        else{
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+        }
+*/
     }
 
     private void initImageBitMaps(){

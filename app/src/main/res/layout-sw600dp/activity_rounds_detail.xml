@@ -13,8 +13,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -32,25 +32,32 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="Mike Davidovich"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
         android:id="@+id/labelRoom"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="Room Number:"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/displayRoom"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/residentName" />
 
     <TextView
         android:id="@+id/labelWrIsr"
@@ -58,11 +65,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="WR/ISR:"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelRoom" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/displayRoundsTime" />
 
     <TextView
         android:id="@+id/displayRoom"
@@ -70,21 +81,29 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
         android:text="1"
+        android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/labelRoom"
         app:layout_constraintStart_toEndOf="@+id/labelRoom"
-        app:layout_constraintTop_toBottomOf="@+id/displayRoundsTime" />
+        app:layout_constraintTop_toTopOf="@+id/labelRoom" />
 
     <TextView
         android:id="@+id/displayWrIsr"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="WR"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/displayRoom"
-        app:layout_constraintTop_toBottomOf="@+id/displayRoom" />
+        app:layout_constraintBottom_toBottomOf="@+id/labelWrIsr"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/labelWrIsr"
+        app:layout_constraintTop_toTopOf="@+id/labelWrIsr" />
 
     <TextView
         android:id="@+id/displayRoundsTime"
@@ -92,14 +111,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="Rounds for 12pm"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/residentName" />
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
         android:id="@+id/labelLeftDw"
@@ -108,96 +128,107 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:text="Left Damascus Way:"
+        android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/enterLeftDw"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/enterLeftDw"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/enterLeftDw" />
 
     <TextView
         android:id="@+id/labelArrivedWork"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:text="Arrived to Work:"
+        android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/enterArrivedWork"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/enterArrivedWork"
+        app:layout_constraintEnd_toEndOf="@+id/labelArrivedDw"
+        app:layout_constraintStart_toStartOf="@+id/labelArrivedDw"
+        app:layout_constraintTop_toTopOf="@+id/enterArrivedWork" />
 
     <TextView
         android:id="@+id/labelLeftWork"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="Left Work:"
+        android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/enterLeftWork"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/enterLeftWork"
+        app:layout_constraintEnd_toEndOf="@+id/labelLeftDw"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/enterLeftWork" />
 
     <TextView
         android:id="@+id/labelArrivedDw"
-        android:layout_width="120dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:text="Arrived to Damascus Way:"
+        android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/enterArrivedDw"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/enterArrivedDw" />
 
     <EditText
         android:id="@+id/enterLeftDw"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginRight="64dp"
+        android:layout_marginBottom="24dp"
         android:ems="10"
         android:inputType="time"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/labelLeftDw"
-        app:layout_constraintTop_toBottomOf="@+id/displayWrIsr" />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/enterLeftWork"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toEndOf="@+id/labelLeftDw" />
 
     <EditText
         android:id="@+id/enterArrivedWork"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:ems="10"
         android:inputType="time"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/enterLeftDw"
-        app:layout_constraintTop_toBottomOf="@+id/enterLeftDw" />
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/enterArrivedDw"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/enterArrivedDw"
+        app:layout_constraintTop_toTopOf="@+id/enterLeftDw" />
 
     <EditText
         android:id="@+id/enterLeftWork"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginBottom="48dp"
         android:ems="10"
         android:inputType="time"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/enterArrivedWork"
-        app:layout_constraintTop_toBottomOf="@+id/enterArrivedWork" />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/spinner"
+        app:layout_constraintEnd_toEndOf="@+id/enterLeftDw"
+        app:layout_constraintStart_toStartOf="@+id/enterLeftDw" />
 
     <EditText
         android:id="@+id/enterArrivedDw"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
         android:ems="10"
         android:inputType="time"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/enterLeftWork"
-        app:layout_constraintTop_toBottomOf="@+id/enterLeftWork" />
+        app:layout_constraintStart_toEndOf="@+id/labelArrivedDw"
+        app:layout_constraintTop_toBottomOf="@+id/enterArrivedWork" />
 
     <TextView
         android:id="@+id/labelLogCode"
@@ -205,27 +236,30 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="32dp"
         android:text="Log Code:"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelArrivedDw" />
+        app:layout_constraintBottom_toTopOf="@+id/buttonVerify"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/enterLeftWork" />
 
     <Button
         android:id="@+id/buttonVerify"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="24dp"
         android:text="Verify Resident"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/enterArrivedDw" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
         android:id="@+id/spinner"
@@ -233,15 +267,20 @@
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/displayRoundsTime"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:textSize="45sp"
+        app:layout_constraintBottom_toBottomOf="@+id/labelLogCode"
+        app:layout_constraintEnd_toStartOf="@+id/enterArrivedDw"
         app:layout_constraintStart_toEndOf="@+id/labelLogCode"
-        app:layout_constraintTop_toBottomOf="@+id/enterArrivedDw"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="@+id/labelLogCode" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="481dp" />
 
 
 </android.support.constraint.ConstraintLayout>
