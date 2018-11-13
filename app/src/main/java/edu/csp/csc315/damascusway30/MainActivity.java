@@ -1,5 +1,6 @@
 package edu.csp.csc315.damascusway30;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -132,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
     //https://www.androidhive.info/2012/05/how-to-connect-android-with-php-mysql/
     //https://developer.android.com/reference/android/os/AsyncTask
 
+    @SuppressLint("StaticFieldLeak")
     class LoadAllResidents extends AsyncTask<String, String, String> {
 
         @Override
@@ -146,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
         protected String doInBackground(String... args) {
 
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            List<NameValuePair> params = new ArrayList<>();
             JSONObject json = jParser.makeHttpRequest(url_all_products, "GET", params);
 
             Log.d("All Residents: ", json.toString());
