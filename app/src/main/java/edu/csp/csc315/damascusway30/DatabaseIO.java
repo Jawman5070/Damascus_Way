@@ -1,7 +1,18 @@
 package edu.csp.csc315.damascusway30;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.nio.channels.NotYetConnectedException;
 import java.sql.*;
+import java.util.Iterator;
 import java.util.List;
 
 public class DatabaseIO {
@@ -26,6 +37,8 @@ public class DatabaseIO {
 
     }
 
+    DatabaseIO(){}
+
     private Object ExecuteSQLCommand(String commandText)
     {
         try{
@@ -43,6 +56,36 @@ public class DatabaseIO {
             return null;
         }
     }
+
+
+    private void getResponse(int method, String url, JSONObject result, final IVolleyCallback callback)
+    {
+        RequestQueue queue = LocalData.getInstance().queue;
+
+        StringRequest request = new StringRequest(Request.Method.GET, url,  new Response.Listener<String>(){
+
+            @Override
+            public void onResponse(String Response) {
+                callback.onSuccessResponse(Response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError e) {
+                e.printStackTrace();
+
+            }
+        });
+        LocalData.getInstance().queue.add(request);
+
+    }
+
+
+
+
+
+
+
+
 
 
     Round GetRound(int id)
@@ -82,8 +125,35 @@ public class DatabaseIO {
         throw new NotYetConnectedException();
     }
 
+    public Resident ParsingExample()
+    {
+        final Resident testMan = new Resident();
+
+        String testUrl = "https://jsonplaceholder.typicode.com/todos/1";
+        getResponse(Request.Method.GET, testUrl, null, new IVolleyCallback() {
+            @Override
+            public void onSuccessResponse(String result) {
+                try{
+                    JSONObject response = new JSONObject(result);
+                        String value = response.getString("title");
+
+                        testMan.setfName(value);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+        return testMan;
+    }
+
     List<Resident> GetResidents(String location)
     {
+
+
+
         // 1) Create and open connection to Web API
         // 2) Call the correct php script to run SQL query
         // 3) Return a JSON result object

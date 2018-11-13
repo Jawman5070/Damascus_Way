@@ -35,6 +35,11 @@ public class Resident implements Comparable<Resident> {
         this.id = id;
     }
 
+    public Resident()
+    {
+
+    }
+
     // Sorts by lastName
     public int compareTo(Resident resident) {
         return this.getlName().compareTo(resident.getlName());
