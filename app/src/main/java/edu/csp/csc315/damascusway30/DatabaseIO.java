@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import java.nio.channels.NotYetConnectedException;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -60,7 +61,7 @@ public class DatabaseIO {
 
     private void getResponse(int method, String url, JSONObject result, final IVolleyCallback callback)
     {
-        RequestQueue queue = LocalData.getInstance().queue;
+        //RequestQueue queue = LocalData.getInstance().queue;
 
         StringRequest request = new StringRequest(Request.Method.GET, url,  new Response.Listener<String>(){
 
@@ -152,6 +153,38 @@ public class DatabaseIO {
     List<Resident> GetResidents(String location)
     {
 
+        String residentURL = "TBD";
+        final ArrayList<Resident> residents = new ArrayList<>();
+
+
+        getResponse(Request.Method.GET, residentURL, null, new IVolleyCallback() {
+            @Override
+            public void onSuccessResponse(String result) {
+                try{
+                    JSONObject response = new JSONObject(result);
+                    Iterator keys = response.keys();
+                    while(keys.hasNext()) // Iterate through the collection of residents
+                    {
+                        Object key = keys.next();
+                        JSONObject value = response.getJSONObject((String)key);
+                        String firstName = value.getString("fName");
+                        String lastName = value.getString("lName");
+
+                        Resident r = new Resident();
+                        r.setfName(firstName);
+                        r.setlName(lastName);
+
+                        residents.add(r);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        return residents;
+
 
 
         // 1) Create and open connection to Web API
@@ -162,7 +195,7 @@ public class DatabaseIO {
 
 
         // return list of residents for location
-        throw new NotYetConnectedException();
+        //throw new NotYetConnectedException();
     }
 
 
