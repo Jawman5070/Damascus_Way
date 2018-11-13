@@ -1,14 +1,8 @@
 package edu.csp.csc315.damascusway30;
 
 import android.content.Context;
-import android.content.pm.ActivityInfo;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -19,21 +13,17 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 import de.hdodenhof.circleimageview.CircleImageView;
-import android.support.v7.widget.Toolbar;
 
 
 public class RoundsDetail extends AppCompatActivity {
 
     TextView displayRoundsTime;
     Context context;
-    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rounds_detail);
-        initToolbar();
-
         List<String> roundsStatus = roundsStatus();
         context = getApplicationContext();
 
@@ -103,12 +93,4 @@ public class RoundsDetail extends AppCompatActivity {
                 .into(photo);
     }
 
-    private void initToolbar(){
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        //set the toolbar logo to Damascus Way
-        toolbar.setLogo(R.drawable.dw_logo);
-        //matches remaining background to white
-        toolbar.setBackgroundColor(Color.WHITE);
-    }
 }
