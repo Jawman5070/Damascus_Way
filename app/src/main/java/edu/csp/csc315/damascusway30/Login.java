@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+
 public class Login extends AppCompatActivity {
 
     private Button loginButton;
@@ -19,6 +22,9 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        LocalData.getInstance().queue = Volley.newRequestQueue(this);
+
 
        // String devConnectionString = "jdbc:mysql://107.180.46.186/damascus_way";
        // String devUser = "damascus_way_mob";
@@ -41,6 +47,12 @@ public class Login extends AppCompatActivity {
 
     public void login()
     {
+
+        //Test JSON
+        DatabaseIO db = new DatabaseIO();
+        Resident r;
+        r = db.ParsingExample();
+
         /*
         Employee employee = _db.GetEmployee(email.getText().toString(), password.getText().toString());
 

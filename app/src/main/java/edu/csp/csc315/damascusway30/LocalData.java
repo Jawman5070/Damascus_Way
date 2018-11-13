@@ -1,11 +1,15 @@
 package edu.csp.csc315.damascusway30;
 
+import com.android.volley.RequestQueue;
+
 public class LocalData {
 
     private Employee currentEmployee;
     private Round currentRound;
     private Resident currentResident;
     private CheckIn currentCheckIn;
+
+    public RequestQueue queue;
 
     public Employee getCurrentEmployee() {
         return this.currentEmployee;

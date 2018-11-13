@@ -8,13 +8,25 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.style.TtsSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -33,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
     private Employee loggedInEmployee;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,12 +54,40 @@ public class MainActivity extends AppCompatActivity {
         initToolbar();
         initImageBitMaps();
         initRecyclerView();
-
-
-
     }
 
-    private void initImageBitMaps(){
+    private void initImageBitMaps() {
+
+
+        //    String url = "http://localhost/Web-App/android-connect/get-resident.php";
+//
+        //       JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+        //             (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+//
+        //                  @Override
+        //              public void onResponse(JSONObject response) {
+        //                 try {
+        //                     @SuppressWarnings("unchecked")
+        //                     Iterator<String> keys = (Iterator<String>) response.keys();
+        //                     while (keys.hasNext()) {
+        //                         String key = keys.next();
+        //                         JSONObject value = response.getJSONObject(key);
+        //                         String component = value.getString("component");
+        //                     }
+        //                 } catch (JSONException e) {
+        //                     Log.e("MYAPP", "unexpected JSON exception", e);
+        //                 }
+        //             }
+        //         }, new Response.ErrorListener() {
+//
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        // TODO: Handle error
+//
+//                    }
+//                });
+//
+//    }
 
         //Create some residents to work with for testing
         Resident joel = new Resident("Joel", "Schuessler", "Clifton", "https://i.imgur.com/Ha3MFuv.jpg", false, "High", "Green", "Brown", "101", "WR");
@@ -66,20 +105,18 @@ public class MainActivity extends AppCompatActivity {
 
         Round r = LocalData.getInstance().getCurrentRound();
         String location = r.Location;
-        if(location.equalsIgnoreCase("Location 1")) {
+        if (location.equalsIgnoreCase("Location 1")) {
             mResidents.add(joel);
             mResidents.add(cheng);
             mResidents.add(jeff);
             mResidents.add(robert);
-        }
-        else if (location.equalsIgnoreCase("Location 2")) {
+        } else if (location.equalsIgnoreCase("Location 2")) {
             mResidents.add(jerry);
             mResidents.add(tyrion);
             mResidents.add(sarah);
             mResidents.add(vadar);
             mResidents.add(mike);
-        }
-        else {
+        } else {
             mResidents.add(heather);
         }
 
@@ -88,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
         Collections.sort(mResidents);
         //Create RecyclerView from List
     }
+
+
 
     private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview.");
