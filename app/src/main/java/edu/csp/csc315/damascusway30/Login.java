@@ -24,6 +24,8 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         LocalData.getInstance().queue = Volley.newRequestQueue(this);
+        _db = new DatabaseIO();
+        _db.ParsingExample();
 
 
        // String devConnectionString = "jdbc:mysql://107.180.46.186/damascus_way";
@@ -49,9 +51,15 @@ public class Login extends AppCompatActivity {
     {
 
         //Test JSON
-        DatabaseIO db = new DatabaseIO();
+       // DatabaseIO db = new DatabaseIO();
         Resident r;
-        r = db.ParsingExample();
+       // r = db.ParsingExample();
+       // try {
+       //     Thread.sleep(10000);
+       // } catch (InterruptedException e) {
+       //     e.printStackTrace();
+       // }
+        r = LocalData.getInstance().getCurrentResident();
 
         /*
         Employee employee = _db.GetEmployee(email.getText().toString(), password.getText().toString());

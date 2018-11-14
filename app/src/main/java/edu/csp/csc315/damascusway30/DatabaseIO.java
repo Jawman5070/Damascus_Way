@@ -126,11 +126,12 @@ public class DatabaseIO {
         throw new NotYetConnectedException();
     }
 
-    public Resident ParsingExample()
-    {
+    public Resident ParsingExample()  {
         final Resident testMan = new Resident();
 
         String testUrl = "https://jsonplaceholder.typicode.com/todos/1";
+        //String testUrl = "http://worldofadventurecraft.com/index.php";
+
         getResponse(Request.Method.GET, testUrl, null, new IVolleyCallback() {
             @Override
             public void onSuccessResponse(String result) {
@@ -139,6 +140,7 @@ public class DatabaseIO {
                         String value = response.getString("title");
 
                         testMan.setfName(value);
+                        LocalData.getInstance().setCurrentResident(testMan);
 
 
                 } catch (JSONException e) {
@@ -147,6 +149,8 @@ public class DatabaseIO {
 
             }
         });
+
+
         return testMan;
     }
 
