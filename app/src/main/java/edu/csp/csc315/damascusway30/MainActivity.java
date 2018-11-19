@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -59,7 +60,20 @@ public class MainActivity extends AppCompatActivity {
 
     private void initImageBitMaps() {
 
-        mResidents = LocalData.getInstance().residentList;
+        ArrayList<Resident> allResidents = LocalData.getInstance().residentList;
+        for(Resident r : allResidents)
+        {
+            if(!r.isCheckedIn)
+                mResidents.add(r);
+        }
+
+        if(mResidents.isEmpty())
+        {
+            Toast.makeText(this, "Round Complete!", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(MainActivity.this, RoundsActivity.class);
+            startActivity(intent);
+        }
+
 
 
         //    String url = "http://localhost/Web-App/android-connect/get-resident.php";

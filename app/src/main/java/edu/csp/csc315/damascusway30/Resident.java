@@ -13,12 +13,16 @@ public class Resident implements Comparable<Resident> {
     //String hairColor;
     String roomNumber;
     String location;
+    Boolean isCheckedIn;
 
     public Resident(String fName, String lName, String photoUrl) {
+        isCheckedIn = false;
+
         this.firstName = fName;
         this.lastName = lName;
         //this.middleName = mName;
         this.photoUrl = photoUrl;
+
         //this.sexOffender = sexOffender;
         //this.riskLevel = riskLevel;
         //this.eyeColor = eyeColor;
