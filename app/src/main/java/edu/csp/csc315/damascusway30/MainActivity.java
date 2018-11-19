@@ -33,6 +33,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
+    private String defaultImage = "https://i.imgur.com/coRRgCY.jpg";
 
     //Variables for RecyclerView Adapter
     private RecyclerViewAdapter adapter;
@@ -57,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initImageBitMaps() {
+
+        mResidents = LocalData.getInstance().residentList;
 
 
         //    String url = "http://localhost/Web-App/android-connect/get-resident.php";
@@ -89,17 +92,17 @@ public class MainActivity extends AppCompatActivity {
 //
 //    }
 
-        //Create some residents to work with for testing
-        Resident joel = new Resident("Joel", "Schuessler", "Clifton", "https://i.imgur.com/Ha3MFuv.jpg", false, "High", "Green", "Brown", "101", "WR");
-        Resident cheng = new Resident("Cheng", "Thao", "", "https://i.imgur.com/y19ovIo.jpg", false, "High", "Brown", "Black", "201", "ISR");
-        Resident jeff = new Resident("El", "Jefe", "", "https://i.imgur.com/NF7LAhw.jpg", true, "Low", "Blue", "Red", "101", "WR");
-        Resident robert = new Resident("Robert", "Krueger", "", "https://i.imgur.com/Kw7Ua01.jpg", true, "Medium", "Brown", "Brown", "201", "ISR");
-        Resident jerry = new Resident("Sailor", "Jerry", "", "https://i.imgur.com/5q4G9P9.jpg", false, "Medium", "Brown", "Brown", "102", "WR");
-        Resident tyrion = new Resident("Tyrion", "Lannister", "", "https://i.imgur.com/S1KQZwN.jpg", false, "Medium", "Brown", "Brown", "102", "WR");
-        Resident sarah = new Resident("Sarah", "Severson", "", "https://i.imgur.com/FKpCI8Y.jpg", true, "Medium", "Brown", "Brown", "202", "WR");
-        Resident vadar = new Resident("Mike", "Vader", "", "https://i.imgur.com/coRRgCY.jpg", true, "Medium", "Brown", "Brown", "203", "ISR");
-        Resident mike = new Resident("Mike", "Davidovich", "", "https://i.imgur.com/CT8ae03.jpg", false, "Medium", "Brown", "Brown", "202", "WR");
-        Resident heather = new Resident("Heather", "Kooiker", "", "https://i.imgur.com/sHAYnvR.jpg", true, "Medium", "Brown", "Brown", "103", "ISR");
+      /*  //Create some residents to work with for testing
+        Resident joel = new Resident("Joel", "Schuessler", "https://i.imgur.com/Ha3MFuv.jpg");
+        Resident cheng = new Resident("Cheng", "Thao", "https://i.imgur.com/y19ovIo.jpg");
+        Resident jeff = new Resident("El", "Jefe", "https://i.imgur.com/NF7LAhw.jpg");
+        Resident robert = new Resident("Robert", "Krueger", "https://i.imgur.com/Kw7Ua01.jpg");
+        Resident jerry = new Resident("Sailor", "Jerry", "https://i.imgur.com/5q4G9P9.jpg");
+        Resident tyrion = new Resident("Tyrion", "Lannister", "https://i.imgur.com/S1KQZwN.jpg");
+        Resident sarah = new Resident("Sarah", "Severson", "https://i.imgur.com/FKpCI8Y.jpg");
+        Resident vadar = new Resident("Mike", "Vader", "https://i.imgur.com/coRRgCY.jpg");
+        Resident mike = new Resident("Mike", "Davidovich", "https://i.imgur.com/CT8ae03.jpg");
+        Resident heather = new Resident("Heather", "Kooiker", "https://i.imgur.com/sHAYnvR.jpg");
         //Add residents to List
         // Add different residents based on location of the round
 
@@ -121,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // sort list A-Z
-
+*/
         Collections.sort(mResidents);
         //Create RecyclerView from List
     }

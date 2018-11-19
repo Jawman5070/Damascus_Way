@@ -40,6 +40,8 @@ public class RoundsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rounds);
         initToolbar();
         employee = LocalData.getInstance().getCurrentEmployee();
+        DatabaseIO db = new DatabaseIO();
+        db.GetResidents("");
 
         currentTime = (TextView) findViewById(R.id.Time);
         employeeName = (TextView) findViewById(R.id.EmployeeText);

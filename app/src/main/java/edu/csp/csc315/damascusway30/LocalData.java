@@ -2,12 +2,16 @@ package edu.csp.csc315.damascusway30;
 
 import com.android.volley.RequestQueue;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class LocalData {
 
     private Employee currentEmployee;
     private Round currentRound;
     private Resident currentResident;
     private CheckIn currentCheckIn;
+    public ArrayList<Resident> residentList = new ArrayList<>();
 
     public RequestQueue queue;
 
@@ -35,6 +39,8 @@ public class LocalData {
     public void setCurrentResident(Resident currentResident) {
         this.currentResident = currentResident;
     }
+
+
 
     public CheckIn getCurrentCheckIn()
     {

@@ -13,6 +13,8 @@ import android.widget.EditText;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
+import java.util.ArrayList;
+
 public class Login extends AppCompatActivity {
 
     private Button loginButton;
@@ -28,8 +30,6 @@ public class Login extends AppCompatActivity {
         initToolbar();
         LocalData.getInstance().queue = Volley.newRequestQueue(this);
         _db = new DatabaseIO();
-        _db.ParsingExample();
-
 
        // String devConnectionString = "jdbc:mysql://107.180.46.186/damascus_way";
        // String devUser = "damascus_way_mob";
@@ -52,30 +52,6 @@ public class Login extends AppCompatActivity {
 
     public void login()
     {
-
-        //Test JSON
-       // DatabaseIO db = new DatabaseIO();
-        Resident r;
-       // r = db.ParsingExample();
-       // try {
-       //     Thread.sleep(10000);
-       // } catch (InterruptedException e) {
-       //     e.printStackTrace();
-       // }
-        r = LocalData.getInstance().getCurrentResident();
-
-        /*
-        Employee employee = _db.GetEmployee(email.getText().toString(), password.getText().toString());
-
-        if(employee != null)
-        {
-            // Employee with valid credentials found in the database
-            //Intent intent = new Intent(Login.this, MainActivity.class);
-            //startActivity(intent);
-            // pass employee into the next view
-        }
-        */
-
 
         if (email.getText().toString() != "" && password.getText().toString().equals("password"))
         {

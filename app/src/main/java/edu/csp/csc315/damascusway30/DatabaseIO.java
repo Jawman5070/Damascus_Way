@@ -7,6 +7,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -126,38 +127,11 @@ public class DatabaseIO {
         throw new NotYetConnectedException();
     }
 
-    public Resident ParsingExample()  {
-        final Resident testMan = new Resident();
 
-        String testUrl = "https://jsonplaceholder.typicode.com/todos/1";
-        //String testUrl = "http://worldofadventurecraft.com/index.php";
-
-        getResponse(Request.Method.GET, testUrl, null, new IVolleyCallback() {
-            @Override
-            public void onSuccessResponse(String result) {
-                try{
-                    JSONObject response = new JSONObject(result);
-                        String value = response.getString("title");
-
-                        testMan.setfName(value);
-                        LocalData.getInstance().setCurrentResident(testMan);
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
-
-
-        return testMan;
-    }
-
-    List<Resident> GetResidents(String location)
+    public void GetResidents(String location)
     {
 
-        String residentURL = "TBD";
+        String residentURL = "http://www.worldofadventurecraft.com/android-connect/get-resident.php";
         final ArrayList<Resident> residents = new ArrayList<>();
 
 
@@ -166,40 +140,26 @@ public class DatabaseIO {
             public void onSuccessResponse(String result) {
                 try{
                     JSONObject response = new JSONObject(result);
-                    Iterator keys = response.keys();
-                    while(keys.hasNext()) // Iterate through the collection of residents
+                    JSONArray residentList = response.getJSONArray("residents");
+                    for(int i = 0; i < residentList.length(); i++)
                     {
-                        Object key = keys.next();
-                        JSONObject value = response.getJSONObject((String)key);
-                        String firstName = value.getString("fName");
-                        String lastName = value.getString("lName");
+                        int id = Integer.parseInt(residentList.getJSONObject(i).getString("Resident_ID"));
+                        String firstName = residentList.getJSONObject(i).getString("Resident_FName");
+                        String lastName = residentList.getJSONObject(i).getString("Resident_LName");
+                        String photoUrl = residentList.getJSONObject(i).getString("Resident_Photo");
 
-                        Resident r = new Resident();
-                        r.setfName(firstName);
-                        r.setlName(lastName);
-
+                        Resident r = new Resident(id, firstName, lastName, photoUrl);
                         residents.add(r);
                     }
+
+
+                    LocalData.getInstance().residentList = residents;
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         });
-
-        return residents;
-
-
-
-        // 1) Create and open connection to Web API
-        // 2) Call the correct php script to run SQL query
-        // 3) Return a JSON result object
-        // 4) Close connection
-        // 5) Parse JSON object into local list of residents
-
-
-        // return list of residents for location
-        //throw new NotYetConnectedException();
     }
 
 
