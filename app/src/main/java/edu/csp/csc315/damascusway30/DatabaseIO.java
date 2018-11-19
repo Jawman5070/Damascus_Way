@@ -130,7 +130,7 @@ public class DatabaseIO {
     {
         final Resident testMan = new Resident();
 
-        String testUrl = "https://jsonplaceholder.typicode.com/todos/1";
+        String testUrl = "http://worldofadventurecraft.com/android-connect/get-resident.php";
         getResponse(Request.Method.GET, testUrl, null, new IVolleyCallback() {
             @Override
             public void onSuccessResponse(String result) {
@@ -153,7 +153,7 @@ public class DatabaseIO {
     List<Resident> GetResidents(String location)
     {
 
-        String residentURL = "TBD";
+        String residentURL = "http://worldofadventurecraft.com/android-connect/get-resident.php";
         final ArrayList<Resident> residents = new ArrayList<>();
 
 
@@ -167,12 +167,25 @@ public class DatabaseIO {
                     {
                         Object key = keys.next();
                         JSONObject value = response.getJSONObject((String)key);
-                        String firstName = value.getString("fName");
-                        String lastName = value.getString("lName");
+                        String lastName = value.getString("Resident_LName");
+                        String firstName = value.getString("Resident_FName");
+                        String mname = value.getString("Resident_MName");
+                        String photo = value.getString("Resident_Photo");
+                        Boolean sexOff = value.getBoolean("Resident_Sex_Offender");
+                        String risk = value.getString("Resident_Risk_Level");
+                        String eye = value.getString("Resident_Eye_Color");
+                        String hair = value.getString("Resident_Hair_Color");
+
 
                         Resident r = new Resident();
                         r.setfName(firstName);
                         r.setlName(lastName);
+                        r.setmName(mname);
+                        r.setPhotoUrl("https://i.imgur.com/y19ovIo.jpg");
+                        r.setSexOffender(sexOff);
+                        r.setRiskLevel(risk);
+                        r.setEyeColor(eye);
+                        r.setHairColor(hair);
 
                         residents.add(r);
                     }

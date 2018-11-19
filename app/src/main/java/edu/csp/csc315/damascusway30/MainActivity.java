@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //    }
 
+/*
         //Create some residents to work with for testing
         Resident joel = new Resident("Joel", "Schuessler", "Clifton", "https://i.imgur.com/Ha3MFuv.jpg", false, "High", "Green", "Brown", "101", "WR");
         Resident cheng = new Resident("Cheng", "Thao", "", "https://i.imgur.com/y19ovIo.jpg", false, "High", "Brown", "Black", "201", "ISR");
@@ -119,8 +120,12 @@ public class MainActivity extends AppCompatActivity {
         } else {
             mResidents.add(heather);
         }
+*/
 
         // sort list A-Z
+
+        DatabaseIO db = new DatabaseIO();
+        mResidents = db.GetResidents("Location 1");
 
         Collections.sort(mResidents);
         //Create RecyclerView from List
