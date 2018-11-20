@@ -13,8 +13,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -36,6 +36,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="Mike Davidovich"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,6 +49,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:text="Room Number:"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/displayRoom"
         app:layout_constraintStart_toStartOf="parent" />
@@ -58,8 +60,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="WR/ISR:"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/labelRoom" />
@@ -70,8 +73,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="1"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/labelRoom"
         app:layout_constraintTop_toBottomOf="@+id/displayRoundsTime" />
@@ -80,8 +84,9 @@
         android:id="@+id/displayWrIsr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="WR"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/displayRoom"
         app:layout_constraintTop_toBottomOf="@+id/displayRoom" />
@@ -96,6 +101,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="Rounds for 12pm"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,6 +114,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:text="Left Damascus Way:"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/enterLeftDw"
         app:layout_constraintStart_toStartOf="parent" />
@@ -119,6 +126,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:text="Arrived to Work:"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/enterArrivedWork"
         app:layout_constraintStart_toStartOf="parent" />
@@ -130,18 +138,23 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:text="Left Work:"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/enterLeftWork"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/labelArrivedDw"
-        android:layout_width="120dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="Arrived to Damascus Way:"
+        android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/enterArrivedDw"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/enterArrivedDw" />
 
@@ -151,11 +164,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:ems="10"
         android:inputType="time"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/labelLeftDw"
         app:layout_constraintTop_toBottomOf="@+id/displayWrIsr" />
@@ -164,11 +178,12 @@
         android:id="@+id/enterArrivedWork"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:ems="10"
         android:inputType="time"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/enterLeftDw"
         app:layout_constraintTop_toBottomOf="@+id/enterLeftDw" />
@@ -177,11 +192,12 @@
         android:id="@+id/enterLeftWork"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:ems="10"
         android:inputType="time"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/enterArrivedWork"
         app:layout_constraintTop_toBottomOf="@+id/enterArrivedWork" />
@@ -190,11 +206,12 @@
         android:id="@+id/enterArrivedDw"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:ems="10"
         android:inputType="time"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/enterLeftWork"
         app:layout_constraintTop_toBottomOf="@+id/enterLeftWork" />
@@ -206,7 +223,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="Log Code:"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -214,17 +233,16 @@
 
     <Button
         android:id="@+id/buttonVerify"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:text="Verify Resident"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/enterArrivedDw" />
 
     <Spinner
@@ -234,14 +252,13 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/displayRoundsTime"
+        app:layout_constraintEnd_toStartOf="@+id/buttonVerify"
         app:layout_constraintStart_toEndOf="@+id/labelLogCode"
-        app:layout_constraintTop_toBottomOf="@+id/enterArrivedDw"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/enterArrivedDw" />
 
 
 </android.support.constraint.ConstraintLayout>

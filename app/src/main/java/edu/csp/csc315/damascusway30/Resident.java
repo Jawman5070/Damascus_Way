@@ -7,31 +7,40 @@ public class Resident implements Comparable<Resident> {
     String lastName;
     String middleName;
     String photoUrl;
-    boolean sexOffender;
-    String riskLevel;
-    String eyeColor;
-    String hairColor;
+    //boolean sexOffender;
+    //String riskLevel;
+    //String eyeColor;
+    //String hairColor;
     String roomNumber;
     String location;
+    Boolean isCheckedIn;
 
-    public Resident(String fName, String lName, String mName, String photoUrl,
-                    boolean sexOffender, String riskLevel, String eyeColor, String hairColor, String roomNumber, String location) {
+    public Resident(String fName, String lName, String photoUrl) {
+        isCheckedIn = false;
+
         this.firstName = fName;
         this.lastName = lName;
-        this.middleName = mName;
+        //this.middleName = mName;
         this.photoUrl = photoUrl;
-        this.sexOffender = sexOffender;
-        this.riskLevel = riskLevel;
-        this.eyeColor = eyeColor;
-        this.hairColor = hairColor;
-        this.roomNumber = roomNumber;
-        this.location = location;
+
+        //this.sexOffender = sexOffender;
+        //this.riskLevel = riskLevel;
+        //this.eyeColor = eyeColor;
+        //this.hairColor = hairColor;
+        //this.roomNumber = roomNumber;
+        //this.location = location;
+
+
+        // Default Photo
+        if(photoUrl.length() <  3)
+        {
+            this.photoUrl = "https://i.imgur.com/coRRgCY.jpg";
+        }
 
     }
 
-    public Resident(int id, String fName, String lName, String mName, String photoUrl,
-                    boolean sexOffender, String riskLevel, String eyeColor, String hairColor, String roomNumber, String location) {
-        this(fName, lName, mName, photoUrl, sexOffender, riskLevel, eyeColor, hairColor, roomNumber, location);
+    public Resident(int id, String fName, String lName, String photoUrl) {
+        this(fName, lName, photoUrl);
         this.id = id;
     }
 
@@ -60,13 +69,7 @@ public class Resident implements Comparable<Resident> {
         this.lastName = lName;
     }
 
-    public String getmName() {
-        return middleName;
-    }
 
-    public void setmName(String mName) {
-        this.middleName = mName;
-    }
 
     public String getPhotoUrl() {
         return photoUrl;
@@ -76,37 +79,10 @@ public class Resident implements Comparable<Resident> {
         this.photoUrl = photoUrl;
     }
 
-    public void setSexOffender(boolean sexOffender) {
-        this.sexOffender = sexOffender;
-    }
-
-    public String getRiskLevel() {
-        return riskLevel;
-    }
-
-    public void setRiskLevel(String riskLevel) {
-        this.riskLevel = riskLevel;
-    }
-
-    public String getEyeColor() {
-        return eyeColor;
-    }
-
-    public void setEyeColor(String eyeColor) {
-        this.eyeColor = eyeColor;
-    }
-
-    public String getHairColor() {
-        return hairColor;
-    }
-
-    public void setHairColor(String hairColor) {
-        this.hairColor = hairColor;
-    }
 
     @Override
     public String toString() {
-        return lastName + ", " + firstName + " " + middleName + " ";
+        return lastName + ", " + firstName;
     }
 
     public void setRoomNumber(String roomNumber){

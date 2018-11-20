@@ -1,9 +1,14 @@
 package edu.csp.csc315.damascusway30;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
@@ -19,25 +24,55 @@ public class RoundsDetail extends AppCompatActivity {
 
     TextView displayRoundsTime;
     Context context;
+    Toolbar toolbar;
+    Button verifyButton;
+    Resident resident;
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rounds_detail);
+        initToolbar();
         List<String> roundsStatus = roundsStatus();
         context = getApplicationContext();
 
         displayRoundsTime = (TextView)findViewById(R.id.displayRoundsTime);
         displayRoundsTime.setText(getRoundsDate());
+        verifyButton = (Button)findViewById(R.id.buttonVerify);
+        verifyButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                verifyResident();
+            }
+        });
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        spinner = (Spinner) findViewById(R.id.spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, roundsStatus);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
-        getIncomingIntent();
+
+        resident = LocalData.getInstance().getCurrentResident();
+        setResident();
+        //getIncomingIntent();
+    }
+
+    private void verifyResident() {
+
+        String status = spinner.getSelectedItem().toString();
+
+        CheckIn c = new CheckIn(new Date(), resident, status);
+        LocalData.getInstance().setCurrentCheckIn(c);
+        //LocalData.getInstance().getCurrentRound().CheckIns.add(c);
+        resident.isCheckedIn = true;
+
+        Intent intent = new Intent(RoundsDetail.this, MainActivity.class);
+
+        startActivity(intent);
+
     }
 
     public String getRoundsDate() {
@@ -46,6 +81,8 @@ public class RoundsDetail extends AppCompatActivity {
         String date = simpleDateFormat.format(new Date());
         return date;
     }
+
+
 
     public List<String> roundsStatus() {
 
@@ -72,25 +109,34 @@ public class RoundsDetail extends AppCompatActivity {
             String roomNumber = getIntent().getStringExtra("room_number");
             String residentLocation = getIntent().getStringExtra("resident_location");
             String residentPhoto = getIntent().getStringExtra("resident_photo");
-            setResident(residentName, roomNumber, residentLocation, residentPhoto);
+            //setResident(residentName, roomNumber, residentLocation, residentPhoto);
         }
     }
 
-    private void setResident(String residentName, String roomNumber, String residentLocation, String residentPhoto){
+    private void setResident(){
         TextView name = findViewById(R.id.residentName);
-        name.setText(residentName);
+        name.setText(resident.firstName + " " + resident.lastName);
 
         TextView room = findViewById(R.id.displayRoom);
-       room.setText(roomNumber);
+       //room.setText(roomNumber);
 
         TextView location = findViewById(R.id.displayWrIsr);
-        location.setText(residentLocation);
+        //location.setText(residentLocation);
 
         CircleImageView photo = findViewById(R.id.imageView);
         Glide.with(context)
                 .asBitmap()
-                .load(residentPhoto)
+                .load(resident.photoUrl)
                 .into(photo);
+    }
+
+    private void initToolbar(){
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        //set the toolbar logo to Damascus Way
+        toolbar.setLogo(R.drawable.dw_logo);
+        //matches remaining background to white
+        toolbar.setBackgroundColor(Color.WHITE);
     }
 
 }

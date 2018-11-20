@@ -1,7 +1,20 @@
 package edu.csp.csc315.damascusway30;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.nio.channels.NotYetConnectedException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class DatabaseIO {
@@ -26,6 +39,8 @@ public class DatabaseIO {
 
     }
 
+    DatabaseIO(){}
+
     private Object ExecuteSQLCommand(String commandText)
     {
         try{
@@ -43,6 +58,36 @@ public class DatabaseIO {
             return null;
         }
     }
+
+
+    private void getResponse(int method, String url, JSONObject result, final IVolleyCallback callback)
+    {
+        //RequestQueue queue = LocalData.getInstance().queue;
+
+        StringRequest request = new StringRequest(Request.Method.GET, url,  new Response.Listener<String>(){
+
+            @Override
+            public void onResponse(String Response) {
+                callback.onSuccessResponse(Response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError e) {
+                e.printStackTrace();
+
+            }
+        });
+        LocalData.getInstance().queue.add(request);
+
+    }
+
+
+
+
+
+
+
+
 
 
     Round GetRound(int id)
@@ -82,17 +127,39 @@ public class DatabaseIO {
         throw new NotYetConnectedException();
     }
 
-    List<Resident> GetResidents(String location)
+
+    public void GetResidents(String location)
     {
-        // 1) Create and open connection to Web API
-        // 2) Call the correct php script to run SQL query
-        // 3) Return a JSON result object
-        // 4) Close connection
-        // 5) Parse JSON object into local list of residents
+
+        String residentURL = "http://www.worldofadventurecraft.com/android-connect/get-resident.php";
+        final ArrayList<Resident> residents = new ArrayList<>();
 
 
-        // return list of residents for location
-        throw new NotYetConnectedException();
+        getResponse(Request.Method.GET, residentURL, null, new IVolleyCallback() {
+            @Override
+            public void onSuccessResponse(String result) {
+                try{
+                    JSONObject response = new JSONObject(result);
+                    JSONArray residentList = response.getJSONArray("residents");
+                    for(int i = 0; i < residentList.length(); i++)
+                    {
+                        int id = Integer.parseInt(residentList.getJSONObject(i).getString("Resident_ID"));
+                        String firstName = residentList.getJSONObject(i).getString("Resident_FName");
+                        String lastName = residentList.getJSONObject(i).getString("Resident_LName");
+                        String photoUrl = residentList.getJSONObject(i).getString("Resident_Photo");
+
+                        Resident r = new Resident(id, firstName, lastName, photoUrl);
+                        residents.add(r);
+                    }
+
+
+                    LocalData.getInstance().residentList = residents;
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
 

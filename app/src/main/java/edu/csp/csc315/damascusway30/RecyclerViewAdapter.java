@@ -60,12 +60,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on: " + mResidents.get(position));
-
+                LocalData.getInstance().setCurrentResident(mResidents.get(position));
                 Intent intent = new Intent(mContext, RoundsDetail.class);
-                intent.putExtra("resident_name", mResidents.get(position).toString());
-                intent.putExtra("room_number", mResidents.get(position).getRoomNumber());
-                intent.putExtra("resident_location", mResidents.get(position).getLocation());
-                intent.putExtra("resident_photo", mResidents.get(position).getPhotoUrl());
+                //intent.putExtra("resident_name", mResidents.get(position).toString());
+                //intent.putExtra("room_number", mResidents.get(position).getRoomNumber());
+                //intent.putExtra("resident_location", mResidents.get(position).getLocation());
+                //intent.putExtra("resident_photo", mResidents.get(position).getPhotoUrl());
                 mContext.startActivity(intent);
             }
         });
