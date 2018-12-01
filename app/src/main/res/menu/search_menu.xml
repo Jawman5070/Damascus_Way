@@ -11,4 +11,20 @@
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="ifRoom|collapseActionView" />
 
+    <item
+        android:id="@+id/az_sort"
+        android:enabled="true"
+        android:icon="@drawable/ic_sort_by_alpha_black_24dp"
+        android:title="Ascending A-Z"
+        android:visible="true"
+        />
+
+    <item
+        android:id="@+id/za_sort"
+        android:enabled="true"
+        android:title="Descending Z-A"
+        android:visible="true"
+        />
+
+
 </menu>
