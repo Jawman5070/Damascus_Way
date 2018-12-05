@@ -40,9 +40,6 @@ public class RoundsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rounds);
         initToolbar();
         employee = LocalData.getInstance().getCurrentEmployee();
-        DatabaseIO db = new DatabaseIO();
-        db.GetResidents("");
-
         currentTime = (TextView) findViewById(R.id.Time);
         employeeName = (TextView) findViewById(R.id.EmployeeText);
         logOut = (Button) findViewById(R.id.LogoutButton);
@@ -55,9 +52,8 @@ public class RoundsActivity extends AppCompatActivity {
 
         // Dev Values -------------------------
         List<String> spinnerArray =  new ArrayList<String>();
-        spinnerArray.add("Location 1");
-        spinnerArray.add("Location 2");
-        spinnerArray.add("Location 3");
+        spinnerArray.add("Rochester");
+        spinnerArray.add("Golden Valley");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item, spinnerArray);
@@ -97,11 +93,8 @@ public class RoundsActivity extends AppCompatActivity {
 
         Round r = new Round(new Date(), locale, employee);
         // Get list of residents from the database for location
-        // DatabaseIO db = new DatabaseIO("", "", ""); -- This should be stored in the LocalData instead?
-        // var residentList = db.GetResidents("Selected Location");
-
-
-
+        DatabaseIO db = new DatabaseIO(); //-- This should be stored in the LocalData instead?
+        db.GetResidents(locale);
         Intent i = new Intent(RoundsActivity.this, MainActivity.class);
         LocalData.getInstance().setCurrentRound(r);
         startActivity(i);

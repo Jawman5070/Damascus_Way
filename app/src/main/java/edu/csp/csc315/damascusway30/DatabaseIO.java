@@ -131,7 +131,7 @@ public class DatabaseIO {
     public void GetResidents(String location)
     {
 
-        String residentURL = "http://www.worldofadventurecraft.com/android-connect/get-resident.php";
+        String residentURL = "http://www.worldofadventurecraft.com/android-connect/get-resident-ve.php?location="+location;
         final ArrayList<Resident> residents = new ArrayList<>();
 
 
