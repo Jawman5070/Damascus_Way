@@ -131,15 +131,16 @@ public class DatabaseIO {
     public void GetResidents(String location)
     {
 
-        String residentURL = "http://www.worldofadventurecraft.com/android-connect/get-resident-ve.php?location="+location;
+        String residentURL = "http://www.worldofadventurecraft.com/api/get-resident-v2.php?location="+location;
         final ArrayList<Resident> residents = new ArrayList<>();
 
 
         getResponse(Request.Method.GET, residentURL, null, new IVolleyCallback() {
             @Override
             public void onSuccessResponse(String result) {
-                try{
-                    JSONObject response = new JSONObject(result);
+                    try{
+                    String shortString = result.substring(1);  //Trim int from front of string
+                    JSONObject response = new JSONObject(shortString);
                     JSONArray residentList = response.getJSONArray("residents");
                     for(int i = 0; i < residentList.length(); i++)
                     {
