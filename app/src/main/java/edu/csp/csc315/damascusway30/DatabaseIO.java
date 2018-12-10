@@ -139,8 +139,8 @@ public class DatabaseIO {
             @Override
             public void onSuccessResponse(String result) {
                     try{
-                    String shortString = result.substring(1);  //Trim int from front of string
-                    JSONObject response = new JSONObject(shortString);
+                    //String shortString = result.substring(1);  //Trim int from front of string
+                    JSONObject response = new JSONObject(result);
                     JSONArray residentList = response.getJSONArray("residents");
                     for(int i = 0; i < residentList.length(); i++)
                     {
