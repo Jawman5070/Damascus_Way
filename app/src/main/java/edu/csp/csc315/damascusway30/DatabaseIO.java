@@ -149,6 +149,16 @@ public class DatabaseIO {
                         String lastName = residentList.getJSONObject(i).getString("Resident_LName");
                         String photoUrl = residentList.getJSONObject(i).getString("Resident_Photo");
 
+                        //Will Add the default image if null or blank in Database
+                        if (photoUrl.equals("null")){
+                            photoUrl = "http://www.worldofadventurecraft.com/img/avatar.jpg";
+                        }
+                        else if (photoUrl.equals("")){
+                            photoUrl = "http://www.worldofadventurecraft.com/img/avatar.jpg";
+                        }
+
+                        System.out.println("PhotoURL = " + photoUrl);
+
                         Resident r = new Resident(id, firstName, lastName, photoUrl);
                         residents.add(r);
                     }

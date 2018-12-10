@@ -37,7 +37,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    private String defaultImage = "https://i.imgur.com/coRRgCY.jpg";
+    private String defaultImage = "https://i.imgur.com/vNqy1e2.jpg";
 
     //Variables for RecyclerView Adapter
     private RecyclerViewAdapter adapter;
