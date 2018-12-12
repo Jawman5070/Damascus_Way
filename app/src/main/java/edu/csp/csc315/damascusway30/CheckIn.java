@@ -17,6 +17,14 @@ public class CheckIn {
         Status = status;
     }
 
+    public CheckIn(int id, String dateString, Resident resident, String status)
+    {
+        Id = id;
+        TimeStamp = dateString;
+        Resident = resident;
+        Status = status;
+    }
+
     public CheckIn(String dateString, Resident resident, String status, String notes)
     {
         this(dateString,resident,status);

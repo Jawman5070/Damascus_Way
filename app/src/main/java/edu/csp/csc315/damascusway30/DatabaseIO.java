@@ -195,8 +195,11 @@ public class DatabaseIO {
             @Override
             public void onSuccessResponse(String result) {
                     try{
-                    //String shortString = result.substring(1);  //Trim int from front of string
-                    JSONObject response = new JSONObject(result);
+                    String shortString = result;    
+                    if(result.charAt(0) == 1) {
+                        shortString = result.substring(1);  //Trim int from front of string
+                    }
+                    JSONObject response = new JSONObject(shortString);
                     JSONArray residentList = response.getJSONArray("residents");
                     for(int i = 0; i < residentList.length(); i++)
                     {
@@ -216,6 +219,17 @@ public class DatabaseIO {
                         System.out.println("PhotoURL = " + photoUrl);
 
                         Resident r = new Resident(id, firstName, lastName, photoUrl);
+
+                        JSONArray checkInList = residentList.getJSONObject(i).getJSONArray("check ins");
+                        for(int j = 0; j < checkInList.length(); j++)
+                        {
+                            int checkInId = Integer.parseInt(checkInList.getJSONObject(j).getString("Check_In_ID"));
+                            String checkInTime = checkInList.getJSONObject(j).getString("Check_In_Time");
+                            String checkInStatus = checkInList.getJSONObject(j).getString("Check_In_Status");
+                            r.addCheckin(new CheckIn(checkInId,checkInTime,r,checkInStatus));
+                        }
+
+
                         residents.add(r);
                     }
 

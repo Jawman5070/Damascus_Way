@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
@@ -28,6 +29,7 @@ public class RoundsDetail extends AppCompatActivity {
     Button verifyButton;
     Resident resident;
     Spinner spinner;
+    ListView checkInList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,19 @@ public class RoundsDetail extends AppCompatActivity {
 
         resident = LocalData.getInstance().getCurrentResident();
         setResident();
+
+        checkInList = (ListView) findViewById(R.id.checkInList);
+        ArrayList<String> listItems = new ArrayList<>();
+        for(CheckIn c : resident.getCheckIns())
+        {
+            listItems.add(c.TimeStamp + " - " + c.Status);
+        }
+
+        ArrayAdapter<String> adpt = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listItems);
+        checkInList.setAdapter(adpt);
+
+
+
         //getIncomingIntent();
     }
 

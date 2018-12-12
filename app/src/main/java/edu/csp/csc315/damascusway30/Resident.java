@@ -1,8 +1,11 @@
 package edu.csp.csc315.damascusway30;
 
+import java.util.ArrayList;
+
 public class Resident implements Comparable<Resident> {
 
     int id;
+
     String firstName;
     String lastName;
     String middleName;
@@ -13,11 +16,12 @@ public class Resident implements Comparable<Resident> {
     //String hairColor;
     String roomNumber;
     String location;
+    private ArrayList<CheckIn> checkIns;
     Boolean isCheckedIn;
 
     public Resident(String fName, String lName, String photoUrl) {
         isCheckedIn = false;
-
+        checkIns = new ArrayList<>();
         this.firstName = fName;
         this.lastName = lName;
         //this.middleName = mName;
@@ -99,5 +103,15 @@ public class Resident implements Comparable<Resident> {
 
     public String getLocation(){
         return location;
+    }
+
+    public ArrayList<CheckIn> getCheckIns()
+    {
+        return checkIns;
+    }
+
+    public void addCheckin(CheckIn c)
+    {
+        checkIns.add(c);
     }
 }
