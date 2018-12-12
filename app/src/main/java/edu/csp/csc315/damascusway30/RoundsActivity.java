@@ -39,6 +39,8 @@ public class RoundsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rounds);
         initToolbar();
+        DatabaseIO db = new DatabaseIO();
+        db.GetResidents("Rochester");
         employee = LocalData.getInstance().getCurrentEmployee();
         currentTime = (TextView) findViewById(R.id.Time);
         employeeName = (TextView) findViewById(R.id.EmployeeText);
