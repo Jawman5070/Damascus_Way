@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Round {
 
-    private int Id;
+    public int Id;
     public Date TimeStamp;
     public String Location;
     public Employee Employee;

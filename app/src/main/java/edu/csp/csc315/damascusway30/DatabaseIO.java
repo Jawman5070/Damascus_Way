@@ -13,6 +13,8 @@ import org.json.JSONObject;
 
 import java.nio.channels.NotYetConnectedException;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -115,10 +117,36 @@ public class DatabaseIO {
         throw new NotYetConnectedException();
     }
 
-    int SaveCheckIn (CheckIn checkIn)
+    public void SaveCheckIn (CheckIn checkIn)
     {
-        // save a specific checkin
-        throw new NotYetConnectedException();
+        int currentRoundId = LocalData.getInstance().getCurrentRound().Id;
+        // TEMP VALUE REMOVE WHEN ROUNDS WORK IS COMPLETED!
+        currentRoundId = 3;
+
+        String residentURL = "http://www.worldofadventurecraft.com/api/save-checkin.php?" +
+                "RoundId="+currentRoundId+"&ResidentId="+checkIn.Resident.id+"&Time='"+checkIn.TimeStamp+"'&Status='"+checkIn.Status+"'&Notes='"+checkIn.Notes+"'";
+        final Employee[] found = {null};
+
+
+        getResponse(Request.Method.GET, residentURL, null, new IVolleyCallback() {
+            @Override
+            public void onSuccessResponse(String result) {
+                try{
+                    //String shortString = result.substring(1);  //Trim int from front of string
+                    JSONObject response = new JSONObject(result);
+                    JSONArray residentList = response.getJSONArray("employees");
+                    for(int i = 0; i < 1; i++)
+                    {
+                        int id = Integer.parseInt(residentList.getJSONObject(i).getString("TestId"));
+                        LocalData.getInstance().getCurrentCheckIn().Id = id;
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     public void GetEmployee(String user, String password)

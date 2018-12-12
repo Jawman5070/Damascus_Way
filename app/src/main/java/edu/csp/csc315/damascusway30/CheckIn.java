@@ -4,21 +4,22 @@ import java.util.Date;
 
 public class CheckIn {
 
-    public Date TimeStamp;
+    public int Id;
+    public String TimeStamp;
     public Resident Resident;
     public String Status;
-    public String Notes;
+    public String Notes = "";
 
-    public CheckIn(Date date, Resident resident, String status)
+    public CheckIn(String dateString, Resident resident, String status)
     {
-        TimeStamp = date;
+        TimeStamp = dateString;
         Resident = resident;
         Status = status;
     }
 
-    public CheckIn(Date date, Resident resident, String status, String notes)
+    public CheckIn(String dateString, Resident resident, String status, String notes)
     {
-        this(date,resident,status);
+        this(dateString,resident,status);
         Notes = notes;
     }
 
