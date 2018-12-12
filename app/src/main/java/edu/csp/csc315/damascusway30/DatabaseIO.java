@@ -196,7 +196,7 @@ public class DatabaseIO {
             public void onSuccessResponse(String result) {
                     try{
                     String shortString = result;
-                    if(result.charAt(0) == 49)
+                    if(result.charAt(0) == 49 || result.charAt(0) == 50)
                     {
                         shortString = result.substring(1);  //Trim int from front of string
                     }
