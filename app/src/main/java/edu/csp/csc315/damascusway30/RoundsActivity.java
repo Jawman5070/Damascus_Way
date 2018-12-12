@@ -77,7 +77,12 @@ public class RoundsActivity extends AppCompatActivity {
 
             }
         });
-
+        logOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logout();
+            }
+        });
         createNewRound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

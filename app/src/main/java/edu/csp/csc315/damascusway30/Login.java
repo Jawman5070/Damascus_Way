@@ -2,6 +2,7 @@ package edu.csp.csc315.damascusway30;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.location.Location;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 public class Login extends AppCompatActivity {
 
     private Button loginButton;
-    private EditText email;
+    private EditText user;
     private EditText password;
     //private DatabaseIO _db;
     Toolbar toolbar;
@@ -38,7 +39,7 @@ public class Login extends AppCompatActivity {
       //  _db = new DatabaseIO(devConnectionString,devUser,devPassword);
 
          loginButton = (Button) findViewById(R.id.loginButton);
-         email = (EditText) findViewById(R.id.editText2);
+         user = (EditText) findViewById(R.id.editText2);
          password = (EditText) findViewById(R.id.editText);
 
          loginButton.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +54,7 @@ public class Login extends AppCompatActivity {
     public void login()
     {
 
-        if (email.getText().toString() != "" && password.getText().toString().equals("password"))
+        if (user.getText().toString() != "" && password.getText().toString().equals("password"))
         {
             Employee e = new Employee(0, "The", "Dude");
             LocalData.getInstance().setCurrentEmployee(e);
@@ -62,6 +63,21 @@ public class Login extends AppCompatActivity {
             Intent intent = new Intent(Login.this, RoundsActivity.class);
 
             startActivity(intent);
+
+        }
+        else if (user.getText().toString() != "" && password.getText().toString() != "")
+        {
+            LocalData.getInstance().getDatabaseIO().GetEmployee(user.getText().toString(), password.getText().toString());
+
+
+            if(LocalData.getInstance().getCurrentEmployee() != null) {
+
+                // do something1
+                Intent intent = new Intent(Login.this, RoundsActivity.class);
+
+                startActivity(intent);
+            }
+            else loginButton.setText("Try Again");
 
         }
         else loginButton.setText("Try Again");

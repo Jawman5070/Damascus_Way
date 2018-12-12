@@ -121,11 +121,39 @@ public class DatabaseIO {
         throw new NotYetConnectedException();
     }
 
-    Employee GetEmployee(String email, String password)
+    public void GetEmployee(String user, String password)
     {
-        // try to find employee with matching credentials in the db
-        throw new NotYetConnectedException();
+        String residentURL = "http://www.worldofadventurecraft.com/api/get-employee.php?user='"+user+"'&pass='"+password+"'";
+        final Employee[] found = {null};
+
+
+        getResponse(Request.Method.GET, residentURL, null, new IVolleyCallback() {
+            @Override
+            public void onSuccessResponse(String result) {
+                try{
+                    //String shortString = result.substring(1);  //Trim int from front of string
+                    JSONObject response = new JSONObject(result);
+                    JSONArray residentList = response.getJSONArray("employees");
+                    for(int i = 0; i < 1; i++)
+                    {
+                        int id = Integer.parseInt(residentList.getJSONObject(i).getString("Staff_ID"));
+                        String firstName = residentList.getJSONObject(i).getString("Staff_FName");
+                        String lastName = residentList.getJSONObject(i).getString("Staff_LName");
+
+                        found[0] = new Employee(id, firstName, lastName);
+
+                    }
+
+
+                    LocalData.getInstance().setCurrentEmployee(found[0]);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
+
 
 
     public void GetResidents(String location)
