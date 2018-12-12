@@ -109,6 +109,7 @@
         android:layout_marginLeft="8dp"
         android:text="Left Damascus Way:"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintBaseline_toBaselineOf="@+id/enterLeftDw"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -120,6 +121,7 @@
         android:layout_marginLeft="8dp"
         android:text="Arrived to Work:"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintBaseline_toBaselineOf="@+id/enterArrivedWork"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -131,6 +133,7 @@
         android:layout_marginLeft="8dp"
         android:text="Left Work:"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintBaseline_toBaselineOf="@+id/enterLeftWork"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -142,6 +145,7 @@
         android:layout_marginLeft="8dp"
         android:text="Arrived to Damascus Way:"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/enterArrivedDw" />
 
@@ -156,6 +160,7 @@
         android:layout_marginRight="8dp"
         android:ems="10"
         android:inputType="time"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/labelLeftDw"
         app:layout_constraintTop_toBottomOf="@+id/displayWrIsr" />
@@ -169,6 +174,7 @@
         android:layout_marginRight="8dp"
         android:ems="10"
         android:inputType="time"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/enterLeftDw"
         app:layout_constraintTop_toBottomOf="@+id/enterLeftDw" />
@@ -182,6 +188,7 @@
         android:layout_marginRight="8dp"
         android:ems="10"
         android:inputType="time"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/enterArrivedWork"
         app:layout_constraintTop_toBottomOf="@+id/enterArrivedWork" />
@@ -195,6 +202,7 @@
         android:layout_marginRight="8dp"
         android:ems="10"
         android:inputType="time"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/enterLeftWork"
         app:layout_constraintTop_toBottomOf="@+id/enterLeftWork" />
