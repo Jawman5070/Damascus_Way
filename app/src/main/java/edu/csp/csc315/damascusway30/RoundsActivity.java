@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ScrollView;
@@ -39,8 +40,8 @@ public class RoundsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rounds);
         initToolbar();
-        DatabaseIO db = new DatabaseIO();
-        db.GetResidents("Rochester");
+        //DatabaseIO db = new DatabaseIO();
+        //db.GetResidents("Rochester");
         employee = LocalData.getInstance().getCurrentEmployee();
         currentTime = (TextView) findViewById(R.id.Time);
         employeeName = (TextView) findViewById(R.id.EmployeeText);
@@ -65,11 +66,15 @@ public class RoundsActivity extends AppCompatActivity {
         locationSelection.setAdapter(adapter);
         // -------------------------------
 
-
-        logOut.setOnClickListener(new View.OnClickListener() {
+        locationSelection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                logout();
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                LocalData.getInstance().getDatabaseIO().GetResidents(adapterView.getSelectedItem().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
 
@@ -95,8 +100,9 @@ public class RoundsActivity extends AppCompatActivity {
 
         Round r = new Round(new Date(), locale, employee);
         // Get list of residents from the database for location
-        DatabaseIO db = new DatabaseIO(); //-- This should be stored in the LocalData instead?
-        db.GetResidents(locale);
+        //DatabaseIO db = new DatabaseIO(); //-- This should be stored in the LocalData instead?
+
+
         Intent i = new Intent(RoundsActivity.this, MainActivity.class);
         LocalData.getInstance().setCurrentRound(r);
         startActivity(i);

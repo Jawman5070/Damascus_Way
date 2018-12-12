@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     //Variables for RecyclerView Adapter
     private RecyclerViewAdapter adapter;
     //DatabaseIO to get residents from Database
-    private DatabaseIO databaseIO;
+    //private DatabaseIO databaseIO;
     //List to hold the residents
     private List<Resident> mResidents = new ArrayList<>();
     //Create Toolbar

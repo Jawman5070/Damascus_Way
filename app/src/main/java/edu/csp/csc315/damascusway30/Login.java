@@ -20,7 +20,7 @@ public class Login extends AppCompatActivity {
     private Button loginButton;
     private EditText email;
     private EditText password;
-    private DatabaseIO _db;
+    //private DatabaseIO _db;
     Toolbar toolbar;
 
     @Override
@@ -29,7 +29,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         initToolbar();
         LocalData.getInstance().queue = Volley.newRequestQueue(this);
-        _db = new DatabaseIO();
+        //_db = new DatabaseIO();
 
        // String devConnectionString = "jdbc:mysql://107.180.46.186/damascus_way";
        // String devUser = "damascus_way_mob";
