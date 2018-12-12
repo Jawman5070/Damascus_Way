@@ -195,8 +195,9 @@ public class DatabaseIO {
             @Override
             public void onSuccessResponse(String result) {
                     try{
-                    String shortString = result;    
-                    if(result.charAt(0) == 1) {
+                    String shortString = result;
+                    if(result.charAt(0) == 49)
+                    {
                         shortString = result.substring(1);  //Trim int from front of string
                     }
                     JSONObject response = new JSONObject(shortString);
