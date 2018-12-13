@@ -103,13 +103,11 @@ public class RoundsActivity extends AppCompatActivity {
     {
         String locale = locationSelection.getSelectedItem().toString();
 
-        Round r = new Round(new Date(), locale, employee);
-        // Get list of residents from the database for location
-        //DatabaseIO db = new DatabaseIO(); //-- This should be stored in the LocalData instead?
-
+        Round r = new Round(new Date(), locale, LocalData.getInstance().getCurrentEmployee());
+        LocalData.getInstance().setCurrentRound(r);
+        LocalData.getInstance().getDatabaseIO().createRound(r);
 
         Intent i = new Intent(RoundsActivity.this, MainActivity.class);
-        LocalData.getInstance().setCurrentRound(r);
         startActivity(i);
     }
 

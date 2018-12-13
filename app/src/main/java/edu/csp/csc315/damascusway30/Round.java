@@ -9,21 +9,20 @@ public class Round {
     public Date TimeStamp;
     public String Location;
     public Employee Employee;
-    public List<CheckIn> CheckIns;
 
 
-    public Round(Date time, String location, Employee employee)
-    {
+    public Round(int id, Date time, String location, Employee employee) {
+        Id = id;
         TimeStamp = time;
         Location = location;
         Employee = employee;
 
     }
 
-    void AddCheckIn(CheckIn check)
-    {
-        CheckIns.add(check);
+    public Round(Date time, String location, Employee employee) {
+
+        TimeStamp = time;
+        Location = location;
+        Employee = employee;
     }
-
-
 }

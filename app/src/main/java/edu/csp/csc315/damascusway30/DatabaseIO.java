@@ -121,7 +121,7 @@ public class DatabaseIO {
     {
         int currentRoundId = LocalData.getInstance().getCurrentRound().Id;
         // TEMP VALUE REMOVE WHEN ROUNDS WORK IS COMPLETED!
-        currentRoundId = 3;
+        //currentRoundId = 3;
 
         String residentURL = "http://www.worldofadventurecraft.com/api/save-checkin.php?" +
                 "RoundId="+currentRoundId+"&ResidentId="+checkIn.Resident.id+"&Time='"+checkIn.TimeStamp+"'&Status='"+checkIn.Status+"'&Notes='"+checkIn.Notes+"'";
@@ -142,6 +142,29 @@ public class DatabaseIO {
                     }
 
 
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void createRound(Round round){
+
+        String roundURL = "http://www.worldofadventurecraft.com/api/create_round.php?" +
+                "StaffId="+round.Employee.id+"&Time="+round.TimeStamp+"&Location='"+round.Location+"'";
+        //final Employee[] found = {null};
+
+        getResponse(Request.Method.GET, roundURL, null, new IVolleyCallback() {
+            @Override
+            public void onSuccessResponse(String result) {
+                try {
+                    JSONObject response = new JSONObject(result);
+                    JSONArray residentList = response.getJSONArray("Round");
+                    for (int i = 0; i < 1; i++) {
+                        int id = Integer.parseInt(residentList.getJSONObject(i).getString("TestId"));
+                        LocalData.getInstance().getCurrentRound().Id = id;
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
