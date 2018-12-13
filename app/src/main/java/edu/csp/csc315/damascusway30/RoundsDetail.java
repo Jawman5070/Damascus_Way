@@ -96,7 +96,7 @@ public class RoundsDetail extends AppCompatActivity {
     }
 
     public String getRoundsDate() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, MMM d, yyyy hh':00' a");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, MMM d, yyyy hh:mm a");
         simpleDateFormat.setTimeZone(TimeZone.getTimeZone("America/Chicago"));
         String date = simpleDateFormat.format(new Date());
         return date;
