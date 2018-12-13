@@ -6,12 +6,12 @@ import java.util.List;
 public class Round {
 
     public int Id;
-    public Date TimeStamp;
+    public String TimeStamp;
     public String Location;
     public Employee Employee;
 
 
-    public Round(int id, Date time, String location, Employee employee) {
+    public Round(int id, String time, String location, Employee employee) {
         Id = id;
         TimeStamp = time;
         Location = location;
@@ -19,7 +19,7 @@ public class Round {
 
     }
 
-    public Round(Date time, String location, Employee employee) {
+    public Round(String time, String location, Employee employee) {
 
         TimeStamp = time;
         Location = location;

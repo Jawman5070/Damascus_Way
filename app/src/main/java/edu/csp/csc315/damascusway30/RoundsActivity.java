@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -103,7 +104,11 @@ public class RoundsActivity extends AppCompatActivity {
     {
         String locale = locationSelection.getSelectedItem().toString();
 
-        Round r = new Round(new Date(), locale, LocalData.getInstance().getCurrentEmployee());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        String dateString = format.format( new Date()   );
+
+        Round r = new Round(dateString, locale, LocalData.getInstance().getCurrentEmployee());
         LocalData.getInstance().setCurrentRound(r);
         LocalData.getInstance().getDatabaseIO().createRound(r);
 

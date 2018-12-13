@@ -151,8 +151,9 @@ public class DatabaseIO {
 
     public void createRound(Round round){
 
+        System.out.println("Data equals " +round.Employee.id + " " + round.TimeStamp + " " + round.Location);
         String roundURL = "http://www.worldofadventurecraft.com/api/create_round.php?" +
-                "StaffId="+round.Employee.id+"&Time="+round.TimeStamp+"&Location='"+round.Location+"'";
+                "StaffId="+round.Employee.id+"&DateTime='"+round.TimeStamp+"'&Location='"+round.Location+"'";
         //final Employee[] found = {null};
 
         getResponse(Request.Method.GET, roundURL, null, new IVolleyCallback() {
@@ -167,6 +168,7 @@ public class DatabaseIO {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    System.out.println("DIDN'T WORK");
                 }
             }
         });
