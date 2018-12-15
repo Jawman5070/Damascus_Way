@@ -121,6 +121,7 @@
         android:text="Left Damascus Way:"
         android:textSize="12sp"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/enterLeftDw"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
@@ -133,6 +134,7 @@
         android:text="Arrived to Work:"
         android:textSize="12sp"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/enterArrivedWork"
         app:layout_constraintEnd_toEndOf="@+id/labelArrivedDw"
         app:layout_constraintStart_toStartOf="@+id/labelArrivedDw"
@@ -147,6 +149,7 @@
         android:text="Left Work:"
         android:textSize="12sp"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/enterLeftWork"
         app:layout_constraintEnd_toEndOf="@+id/labelLeftDw"
         app:layout_constraintStart_toStartOf="parent"
@@ -161,6 +164,7 @@
         android:text="Arrived to Damascus Way:"
         android:textSize="12sp"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/enterArrivedDw"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/enterArrivedDw" />
@@ -179,7 +183,8 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/labelLeftDw"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        android:visibility="invisible" />
 
     <EditText
         android:id="@+id/enterArrivedWork"
@@ -188,6 +193,7 @@
         android:ems="10"
         android:inputType="time"
         android:textSize="12sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/enterArrivedDw"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/enterArrivedDw"
@@ -201,6 +207,7 @@
         android:ems="10"
         android:inputType="time"
         android:textSize="12sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/enterLeftDw"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/enterLeftDw"
@@ -218,6 +225,7 @@
         android:ems="10"
         android:inputType="time"
         android:textSize="12sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/labelArrivedDw"
         app:layout_constraintTop_toBottomOf="@+id/enterArrivedWork" />
@@ -230,7 +238,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         android:text="Log Code:"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -266,6 +274,23 @@
         app:layout_constraintEnd_toEndOf="@+id/displayRoundsTime"
         app:layout_constraintStart_toEndOf="@+id/labelLogCode"
         app:layout_constraintTop_toTopOf="@+id/labelLogCode" />
+
+    <ListView
+        android:id="@+id/checkInList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginLeft="96dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="96dp"
+        android:layout_marginRight="96dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/displayWrIsr"
+        app:layout_constraintVertical_bias="1.0" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"

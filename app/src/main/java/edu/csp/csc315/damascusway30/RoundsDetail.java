@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
@@ -28,6 +29,7 @@ public class RoundsDetail extends AppCompatActivity {
     Button verifyButton;
     Resident resident;
     Spinner spinner;
+    ListView checkInList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,19 @@ public class RoundsDetail extends AppCompatActivity {
 
         resident = LocalData.getInstance().getCurrentResident();
         setResident();
+
+        checkInList = (ListView) findViewById(R.id.checkInList);
+        ArrayList<String> listItems = new ArrayList<>();
+        for(CheckIn c : resident.getCheckIns())
+        {
+            listItems.add(c.TimeStamp + " - " + c.Status);
+        }
+
+        ArrayAdapter<String> adpt = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listItems);
+        checkInList.setAdapter(adpt);
+
+
+
         //getIncomingIntent();
     }
 
@@ -64,9 +79,14 @@ public class RoundsDetail extends AppCompatActivity {
 
         String status = spinner.getSelectedItem().toString();
 
-        CheckIn c = new CheckIn(new Date(), resident, status);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        String dateString = format.format( new Date()   );
+
+        CheckIn c = new CheckIn(dateString, resident, status);
         LocalData.getInstance().setCurrentCheckIn(c);
-        //LocalData.getInstance().getCurrentRound().CheckIns.add(c);
+        LocalData.getInstance().getDatabaseIO().SaveCheckIn(c);
+
         resident.isCheckedIn = true;
 
         Intent intent = new Intent(RoundsDetail.this, MainActivity.class);
@@ -76,7 +96,7 @@ public class RoundsDetail extends AppCompatActivity {
     }
 
     public String getRoundsDate() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, MMM d, yyyy hh':00' a");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, MMM d, yyyy hh:mm a");
         simpleDateFormat.setTimeZone(TimeZone.getTimeZone("America/Chicago"));
         String date = simpleDateFormat.format(new Date());
         return date;

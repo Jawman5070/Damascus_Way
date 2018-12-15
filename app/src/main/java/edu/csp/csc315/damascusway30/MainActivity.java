@@ -13,7 +13,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -27,6 +29,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -34,12 +37,12 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    private String defaultImage = "https://i.imgur.com/coRRgCY.jpg";
+    private String defaultImage = "https://i.imgur.com/vNqy1e2.jpg";
 
     //Variables for RecyclerView Adapter
     private RecyclerViewAdapter adapter;
     //DatabaseIO to get residents from Database
-    private DatabaseIO databaseIO;
+    //private DatabaseIO databaseIO;
     //List to hold the residents
     private List<Resident> mResidents = new ArrayList<>();
     //Create Toolbar
@@ -172,6 +175,17 @@ public class MainActivity extends AppCompatActivity {
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
 
+        MenuItem azSort = menu.findItem(R.id.az_sort);
+/*
+        Button azSortButton = (Button) azSort.getActionView();
+
+        azSortButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                sortArrayList();
+            }
+        });
+*/
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
@@ -187,5 +201,40 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+
+        if(id == R.id.az_sort){
+            sortArrayListAscending();
+            return true;
+        }
+        else if(id == R.id.za_sort){
+            sortArrayListDescending();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void sortArrayListAscending(){
+        Collections.sort(mResidents, new Comparator<Resident>() {
+            @Override
+            public int compare(Resident o1, Resident o2) {
+                return o1.getlName().compareTo(o2.getlName());
+            }
+        });
+        adapter.notifyDataSetChanged();
+    }
+
+    private void sortArrayListDescending(){
+        Collections.sort(mResidents, new Comparator<Resident>() {
+            @Override
+            public int compare(Resident o1, Resident o2) {
+                return o2.getlName().compareTo(o1.getlName());
+            }
+        });
+        adapter.notifyDataSetChanged();
     }
 }

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ScrollView;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -39,10 +41,9 @@ public class RoundsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rounds);
         initToolbar();
+        //DatabaseIO db = new DatabaseIO();
+        //db.GetResidents("Rochester");
         employee = LocalData.getInstance().getCurrentEmployee();
-        DatabaseIO db = new DatabaseIO();
-        db.GetResidents("");
-
         currentTime = (TextView) findViewById(R.id.Time);
         employeeName = (TextView) findViewById(R.id.EmployeeText);
         logOut = (Button) findViewById(R.id.LogoutButton);
@@ -55,9 +56,8 @@ public class RoundsActivity extends AppCompatActivity {
 
         // Dev Values -------------------------
         List<String> spinnerArray =  new ArrayList<String>();
-        spinnerArray.add("Location 1");
-        spinnerArray.add("Location 2");
-        spinnerArray.add("Location 3");
+        spinnerArray.add("Rochester");
+        spinnerArray.add("Golden Valley");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item, spinnerArray);
@@ -67,14 +67,23 @@ public class RoundsActivity extends AppCompatActivity {
         locationSelection.setAdapter(adapter);
         // -------------------------------
 
+        locationSelection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                LocalData.getInstance().getDatabaseIO().GetResidents(adapterView.getSelectedItem().toString());
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         logOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 logout();
             }
         });
-
         createNewRound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,15 +104,15 @@ public class RoundsActivity extends AppCompatActivity {
     {
         String locale = locationSelection.getSelectedItem().toString();
 
-        Round r = new Round(new Date(), locale, employee);
-        // Get list of residents from the database for location
-        // DatabaseIO db = new DatabaseIO("", "", ""); -- This should be stored in the LocalData instead?
-        // var residentList = db.GetResidents("Selected Location");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+        String dateString = format.format( new Date()   );
 
+        Round r = new Round(dateString, locale, LocalData.getInstance().getCurrentEmployee());
+        LocalData.getInstance().setCurrentRound(r);
+        LocalData.getInstance().getDatabaseIO().createRound(r);
 
         Intent i = new Intent(RoundsActivity.this, MainActivity.class);
-        LocalData.getInstance().setCurrentRound(r);
         startActivity(i);
     }
 

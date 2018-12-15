@@ -3,6 +3,7 @@ package edu.csp.csc315.damascusway30;
 import com.android.volley.RequestQueue;
 
 import java.lang.reflect.Array;
+import java.security.PublicKey;
 import java.util.ArrayList;
 
 public class LocalData {
@@ -11,6 +12,10 @@ public class LocalData {
     private Round currentRound;
     private Resident currentResident;
     private CheckIn currentCheckIn;
+    private static final DatabaseIO dbIO = new DatabaseIO();
+
+    public DatabaseIO getDatabaseIO() {return this.dbIO;}
+
     public ArrayList<Resident> residentList = new ArrayList<>();
 
     public RequestQueue queue;
